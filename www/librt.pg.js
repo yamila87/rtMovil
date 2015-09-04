@@ -267,7 +267,7 @@ function rtInit() {
 		//XXX:SEC: cambiar PathToLib segun version para que no se pueda bajar una version de un host y acceder a los datos de otra? relacion con encriptar datos bajados?
 		//alert("Cfg "+ser_json(CFGLIB));
 		runApp(); //XXX: que hacemos si no se pudo iniciar app? hay que volver aca :)
-	} catch (ex) { alert("ERROR "+ex.message+" "+str(ex)) } });	
+	} catch (ex) { alert("ERROR AAAAAAA "+ex.message+" "+str(ex)) } });	
 
 	bgx.off('click').on('click',function () { navigator.app.exitApp(); })
 	bgc.off('click').on('click',function () { borrarTodo_dir(CFGLIB.pathToLib,true,function () { alert("Los archivos locales han sido eliminados"); }); });
