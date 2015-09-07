@@ -4,7 +4,7 @@ GLOBAL= this.GLOBAL || this;
 CfgUser= GLOBAL.CfgUser || "XxxUser";
 CfgPass= GLOBAL.CfgPass || "XxxPass";
 
-//S: base 
+//S: base
 function ensureInit(k,v,scope) { //D: ensure k exists in scope initializing with "v" if it didn't
 	if (!(k in scope)) { scope[k]= v; }
 	return scope[k];
@@ -12,12 +12,12 @@ function ensureInit(k,v,scope) { //D: ensure k exists in scope initializing with
 CFGLIB= ensureInit("CFGLIB",{},this);
 
 function str(x) {
-	var r; 
+	var r;
 	try { r= JSON.stringify(x); }
 	catch (ex) { //A: json fails, must be circular
 		var t= typeof(x)
 		r="str_r('"+typeof(x)+"',{";
-		for (var i in x) { r+="'"+i+"': '"+x[i]+"', " }	
+		for (var i in x) { r+="'"+i+"': '"+x[i]+"', " }
 		r+="});"
 	}
 	return r;
@@ -28,9 +28,9 @@ function evalm(src,failSilently) {
 	var r;
 	try { r = window.eval(src); logm("DBG",9,"EVALM",[r,src]); }
 	catch (ex) {
-		logm("ERR",failSilently ? 9 : 0,"EVALM",[ex.message,src]); 
+		logm("ERR",failSilently ? 9 : 0,"EVALM",[ex.message,src]);
 		if (!failSilently) { throw(ex); }
-	}	
+	}
 	return r;
 }
 
@@ -60,7 +60,7 @@ function getFile(path,fmt,cbok,cbfail) {
 		var reader = new FileReader();
 		reader.onloadend = function(evt) {
 			logm("DBG",8,"getFile onloadend",{path: path, result: evt.target.result});
-			cbok(evt.target.result);	
+			cbok(evt.target.result);
 		};
 		if (fmt=="url") { reader.readAsDataURL(file); }
 		else if (fmt=="bin") { reader.readAsBinaryString(file); }
@@ -78,7 +78,7 @@ function getFile(path,fmt,cbok,cbfail) {
 
 	logm("DBG",8,"getFile",{path: path});
 	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onGotFs, cbfail);
-} 
+}
 
 function getFileMeta(path,cbok,cbfail) {
 	cbfail=cbfail ||onFail;
@@ -92,7 +92,7 @@ function getFileMeta(path,cbok,cbfail) {
 
 function keysFile(dirPath,cb) {
 	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, fsSuccess, onFail);
- 
+
 	function fsSuccess(fs) {
 		logm("DBG",9,"keysFile gotfs",[dirPath,fs.root]); try {
 			if (dirPath) { fs.root.fullPath= dirPath; } //A: cd //XXX: NO usar O restaurar, PERSISTE PARA OTRAS LLAMADAS!!!
@@ -109,13 +109,13 @@ function setFile(path,data,cbok,cbfail) {
 
   function gotFS(fileSystem) {
 		logm("DBG",9,"setFile gotfs",[path]); try {
-	    fileSystem.root.getFile(path, {create: true, exclusive: false}, gotFileEntry, cbfail);
+		fileSystem.root.getFile(path, {create: true, exclusive: false}, gotFileEntry, cbfail);
 		} catch (ex) { logm("ERR",7,"setFile gotfs",[path,ex.message]); }
 	}
 
   function gotFileEntry(fileEntry) {
 		logm("DBG",9,"setFile gotentry",[path]); try {
-	    fileEntry.createWriter(gotFileWriter, cbfail);
+		fileEntry.createWriter(gotFileWriter, cbfail);
 		} catch (ex) { logm("ERR",7,"setFile gotentry",[path,ex.message]); }
   }
 
@@ -125,7 +125,7 @@ function setFile(path,data,cbok,cbfail) {
 					writer.onwriteend = cbok;
 					writer.write(data);
 			};
-			writer.truncate(0);  
+			writer.truncate(0);
 		} catch (ex) { logm("ERR",7,"setFile write",[path,ex.message]); }
   }
 }
@@ -137,18 +137,18 @@ function setFileDir(path,cbok,cbfail) {
 	var parts= path.split("/");
 	var i= 0;
 
-	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onRequestFileSystemSuccess, cbfail); 
+	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onRequestFileSystemSuccess, cbfail);
 
-	function onRequestFileSystemSuccess(fileSystem) { 
+	function onRequestFileSystemSuccess(fileSystem) {
 		if (parts.length==0) { cbok(fileSystem.root); }
 		else {	createPart(fileSystem.root) }
 	}
 
 	function createPart(pdir) {
 		var p= parts[i]; i++;
-    pdir.getDirectory(p, {create: true, exclusive: false}, i<parts.length ? createPart : cbok,cbfail);
+	pdir.getDirectory(p, {create: true, exclusive: false}, i<parts.length ? createPart : cbok,cbfail);
 	}
-} 
+}
 
 borrarTodo_dir= function (dirPath,quiereSinPedirConfirmacion,cb) {
  var gotDir= function (dirEntry) { try { ///XXX: separar de UI
@@ -177,10 +177,10 @@ function getHttp(url,reqdata,cbok,cbfail) {
 	$.ajax({ url: url, data: reqdata,
 		cache: false,
 		dataType: 'text', //A: don't eval or process data
-		headers: { "Authorization": "Basic " + btoa( CfgUser + ":" + CfgPass) }, 
+		headers: { "Authorization": "Basic " + btoa( CfgUser + ":" + CfgPass) },
 		beforeSend: function (jqXHR, settings) { //A: for binary downloads
-      jqXHR.overrideMimeType('text/plain; charset=x-user-defined');
-    },
+	  jqXHR.overrideMimeType('text/plain; charset=x-user-defined');
+	},
 		success: function(resdata){
 			logm("DBG",8,"getHttp",{url: url, len: reqdata.length, req: reqdata, res: resdata});
 			cbok(resdata);
@@ -192,10 +192,10 @@ function getHttp(url,reqdata,cbok,cbfail) {
 CFGLIB.pathToLib="pm/pg/";
 CFGLIB.pathDfltInLib="a/";
 
-function evalFile(name,failSilently,cbok,cbfail) { 
+function evalFile(name,failSilently,cbok,cbfail) {
 	getFile(CFGLIB.pathToLib+name,"txt",function (srce) { try {
-		var src= encriptar_r(srce,SRC_KEY);	
-		var r= evalm(src+' //# sourceURL='+name,failSilently); cbok(r); 
+		var src= encriptar_r(srce,SRC_KEY);
+		var r= evalm(src+' //# sourceURL='+name,failSilently); cbok(r);
 	} catch (ex) { logm("ERR",1,"evalFile "+str(ex)); }},cbfail);
 }
 
@@ -236,7 +236,7 @@ ensureInit("LibAppStarted",false,this);
 ensureInit("Cfg",false,this);
 function rtInit() {
 	if (LibAppStarted) { return true; } LibAppStarted= true;
-	CFGLIB.loglvlmax=0;	
+	CFGLIB.loglvlmax=0;
 	//D: pantalla inicial ofreciendo Run, Run con debug (alerts) y bajarse la app
 	var con= $('#con'); con.html('');
 	var form= $('<div style="font-size: 2em; text-align: center;"/>'); con.append(form);
@@ -262,11 +262,12 @@ function rtInit() {
 		if (m[3]) { CFGLIB.appUrl= m[3]+'/js' }
 		var md;
 		if (md= /d(\d?)/.exec(m[2])) { CFGLIB.loglvlmax= parseInt(md[1])||9; }
-		CFGLIB.appUrl+= m[1];	
+		CFGLIB.appUrl+= m[1];
 		//XXX:SEC: cambiar PathToLib segun version para que no se pueda bajar una version de un host y acceder a los datos de otra? relacion con encriptar datos bajados?
 		//alert("Cfg "+ser_json(CFGLIB));
+		alert("HOLAAAAAAA, " ser_json(CFGLIB));
 		runApp(); //XXX: que hacemos si no se pudo iniciar app? hay que volver aca :)
-	} catch (ex) { alert("ERROR "+ex.message+" "+str(ex)) } });	
+	} catch (ex) { alert("ERROR "+ex.message+" "+str(ex)) } });
 
 	bgx.off('click').on('click',function () { navigator.app.exitApp(); })
 	bgc.off('click').on('click',function () { borrarTodo_dir(CFGLIB.pathToLib,true,function () { alert("Los archivos locales han sido eliminados"); }); });
