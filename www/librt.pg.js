@@ -219,7 +219,8 @@ function evalUpdated(name,cbok,cbfail) {
 }
 
 //S: init
-CFG_APPURL_DFLT= 'https://rtmovil.enerminds.com:8443/app/js';
+//CFG_APPURL_DFLT= 'https://rtmovil.enerminds.com:8443/app/js';
+CFG_APPURL_DFLT='https://10.70.251.64:8444/app/js';
 CFGLIB.appUrl= CFG_APPURL_DFLT;
 SRC_KEY= "18273hjsjacjhq83qq3dhsjdhdy38znddj";
 function runApp() { //XXX:generalizar usando evalUpdated
@@ -265,7 +266,6 @@ function rtInit() {
 		CFGLIB.appUrl+= m[1];
 		//XXX:SEC: cambiar PathToLib segun version para que no se pueda bajar una version de un host y acceder a los datos de otra? relacion con encriptar datos bajados?
 		//alert("Cfg "+ser_json(CFGLIB));
-		alert("HOLAAAAAAA, " ser_json(CFGLIB));
 		runApp(); //XXX: que hacemos si no se pudo iniciar app? hay que volver aca :)
 	} catch (ex) { alert("ERROR "+ex.message+" "+str(ex)) } });
 
