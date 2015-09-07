@@ -176,10 +176,14 @@ function getHttp(url,reqdata,cbok,cbfail) {
 	console.log("EN getHTTP " +url+" "+reqdata);
 	cbfail=cbfail || onFail;
 	logm("DBG",8,"getHttp",{url: url, req: reqdata});
+
+	var userPass= Cfg.User + ":" + Cfg.Pass;
+	console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: " + userPass);
+
 	$.ajax({ url: url, data: reqdata,
 		cache: false,
 		dataType: 'text', //A: don't eval or process data
-		headers: { "Authorization": "Basic " + btoa( Cfg.User + ":" + Cfg.Pass) },
+		headers: { "Authorization": "Basic " + btoa(userPass ) },
 		beforeSend: function (jqXHR, settings) { //A: for binary downloads
 	  jqXHR.overrideMimeType('text/plain; charset=x-user-defined');
 	},
@@ -262,7 +266,9 @@ function rtInit() {
 		alert("Iniciando");
 		CFGLIB.appUrl= CFG_APPURL_DFLT;
 		CFGLIB.loglvlmax= 0;
+		console.log("BBBB "+iusr.val() + ipass.val());
 		Cfg.User= iusr.val(); Cfg.Pass= ipass.val(); var iv= Cfg.VersionStr= iversion.val();
+		console.log(ser_json(Cfg));
 		var m= /([^:]*):?([^:]*):?(\S*)/.exec(iv);
 		if (m[3]) { CFGLIB.appUrl= m[3]+'/js' }
 		var md;
