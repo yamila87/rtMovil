@@ -1,9 +1,9 @@
 CACHE_LOCALSTORAGE= true;
-DBG_DATA= false;
+DBG_DATA= true;
 
 GLOBAL= this.GLOBAL || this;
 GLOBAL.DBG= GLOBAL.DBG || {};
-DBG.run= false;
+DBG.run= true;
 
 //****************************************************************************
 //S: UTIL/base, XXX:mover a librt!
