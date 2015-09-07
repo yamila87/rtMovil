@@ -267,6 +267,7 @@ function rtInit() {
 		CFGLIB.appUrl= CFG_APPURL_DFLT;
 		CFGLIB.loglvlmax= 0;
 		console.log("BBBB "+iusr.val() + ipass.val());
+		Cfg={};
 		Cfg.User= iusr.val(); Cfg.Pass= ipass.val(); var iv= Cfg.VersionStr= iversion.val();
 		console.log(ser_json(Cfg));
 		var m= /([^:]*):?([^:]*):?(\S*)/.exec(iv);
