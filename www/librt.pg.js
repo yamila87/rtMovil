@@ -178,7 +178,6 @@ function getHttp(url,reqdata,cbok,cbfail) {
 	logm("DBG",8,"getHttp",{url: url, req: reqdata});
 
 	var userPass= Cfg.User + ":" + Cfg.Pass;
-	console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: " + userPass);
 
 	$.ajax({ url: url, data: reqdata,
 		cache: false,
@@ -212,7 +211,7 @@ function evalFileOrDflt(name,failSilently,cbok,cbfail) {
 }
 
 function getHttpToDflt(fname,url,cbok,cbfail) {
-	console.log("EN GETHTTPTODLF" + fname +" "+url);
+	console.log("EN GETHTTPTODLF " + fname +" URL   "+url);
 	getHttp(url,{},function (d) { try {
 		var de= encriptar(d,SRC_KEY);
 		setFile(CFGLIB.pathToLib+CFGLIB.pathDfltInLib+fname,de,cbok,cbok);
@@ -233,7 +232,7 @@ SRC_KEY= "18273hjsjacjhq83qq3dhsjdhdy38znddj";
 function runApp() { //XXX:generalizar usando evalUpdated
 	console.log("RUN APP "+CFGLIB.appUrl);
 	logm("DBG",1,"RUN APP "+ser_json(Cfg)+" "+ser_json(CFGLIB));
-	var s0= function () { console.log("EN S0");getHttpToDflt('app.js',CFGLIB.appUrl,s1,s1); }
+	var s0= function () { console.log("EN S0  "  + CFGLIB.appUrl );getHttpToDflt('app.js',CFGLIB.appUrl,s1,s1); }
 	var s1= function () { evalFile(CFGLIB.pathDfltInLib+'app.js',false,nullf,function (err) {
 		alert("Error iniciando paso 2, ingresó los datos correctos? ("+str(err)+")");
 		LibAppStarted= false; rtInit();
@@ -266,10 +265,8 @@ function rtInit() {
 		alert("Iniciando");
 		CFGLIB.appUrl= CFG_APPURL_DFLT;
 		CFGLIB.loglvlmax= 0;
-		console.log("BBBB "+iusr.val() + ipass.val());
 		Cfg={};
 		Cfg.User= iusr.val(); Cfg.Pass= ipass.val(); var iv= Cfg.VersionStr= iversion.val();
-		console.log(ser_json(Cfg));
 		var m= /([^:]*):?([^:]*):?(\S*)/.exec(iv);
 		if (m[3]) { CFGLIB.appUrl= m[3]+'/js' }
 		var md;
