@@ -214,13 +214,12 @@ clonar= function (o) { var r= {}; for (var k in o) { r[k]= o[k] }; return r; }
 CfgDbKey = GLOBAL.CfgDbKey || '3sUns3Cr3t0!';
 encriptar= function (data,key) { try {
   var datae= sjcl.encrypt(key || CfgDbKey,btoa(encodeURIComponent(ser_planoOjson(data))));
- //return datae;
- return data;
+ return datae;
 } catch(ex) { logmex("ERR",1,"ENCRIPTAR",data,ex); throw(ex) } }
 
 encriptar_r= function (data,key) { try {
- // return ser_planoOjson_r(decodeURIComponent(atob(sjcl.decrypt(key || CfgDbKey,data))));
- return data;
+ return ser_planoOjson_r(decodeURIComponent(atob(sjcl.decrypt(key || CfgDbKey,data))));
+
 } catch(ex) { logmex("ERR",1,"ENCRIPTAR R",data,ex); throw(ex) } }
 
 runBg= L.Util.requestAnimFrame;
@@ -296,7 +295,7 @@ showMsg= function (s) {
 }
 
 
-var appHost= (enAppMovil && CFGLIB.appUrl) ? CFGLIB.appUrl.replace(/[^\/]+$/,"") : 'https://10.70.251.55:8444/app/';
+var appHost= (enAppMovil && CFGLIB.appUrl) ? CFGLIB.appUrl.replace(/[^\/]+$/,"") : 'https://10.70.251.64:8444/app/';
 //var appHost='https://192.168.10.4:8443/app/';
 var host= location.host ? "//"+location.host+"/app/" : appHost; //XXX: hack for phonegap, move inside libRequire, implement differently in each runtime
 DBG.run && alert("HOST '"+host+"'");
