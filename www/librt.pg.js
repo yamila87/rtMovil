@@ -246,8 +246,8 @@ function rtInit() {
 	//D: pantalla inicial ofreciendo Run, Run con debug (alerts) y bajarse la app
 	var con= $('#con'); con.html('');
 	var form= $('<div style="font-size: 2em; text-align: center;"/>'); con.append(form);
-	var iusr=$('<input  placeholder="usuario">');
-	var ipass=$('<input  placeholder="clave">');
+	var iusr=$('<input placeholder="usuario">');
+	var ipass=$('<input placeholder="clave">');
 	var iversion=$('<input placeholder="version">');
 	var bgo=$('<button>Iniciar</buton>');
 	var bgx=$('<button>Salir</buton>');
@@ -263,9 +263,7 @@ function rtInit() {
 		alert("Iniciando");
 		CFGLIB.appUrl= CFG_APPURL_DFLT;
 		CFGLIB.loglvlmax= 0;
-		console.log("USER: " + iusr.val() + " PASS"+ipass.val());
 		Cfg.User= iusr.val(); Cfg.Pass= ipass.val(); var iv= Cfg.VersionStr= iversion.val();
-		console.log( "CFG: "+ ser_json(Cfg) );
 		var m= /([^:]*):?([^:]*):?(\S*)/.exec(iv);
 		if (m[3]) { CFGLIB.appUrl= m[3]+'/js' }
 		var md;
