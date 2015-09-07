@@ -38,6 +38,9 @@ logm= GLOBAL.logm || function(t,lvl,msg,o) { //D: usar SOLO esta funcion de log 
 var Cache= { LibEval: {} };
 var LibWaiting= {};
 function libRequire(file,urlBase,url,cb) { //D: load js modules, call BEFORE using, asume async loading -> call dependent code from libStart that is always called AFTER loading all previously required modules
+    console.log("FILE: " + file);
+    console.log("URLBASE: " +urlBase);
+    console.log("url: " + url);
     url= url || (urlBase+file);
     var needsEval= true;
     function processData(response) {
