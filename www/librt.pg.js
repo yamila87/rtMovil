@@ -173,19 +173,18 @@ borrarTodo_dir= function (dirPath,quiereSinPedirConfirmacion,cb) {
 //S: http
 function getHttp(url,reqdata,cbok,cbfail) {
 
-	console.log("EN getHTTP " +url+" "+toJs(reqdata9);
+	console.log("EN getHTTP " +url+" "+reqdata);
 	cbfail=cbfail || onFail;
 	logm("DBG",8,"getHttp",{url: url, req: reqdata});
 	$.ajax({ url: url, data: reqdata,
 		cache: false,
 		dataType: 'text', //A: don't eval or process data
-		headers: { "Authorization": "Basic " + btoa( Cfg.User + ":" + Cfg.Pass) },
+		headers: { "Authorization": "Basic " + btoa( CfgUser + ":" + CfgPass) },
 		beforeSend: function (jqXHR, settings) { //A: for binary downloads
 	  jqXHR.overrideMimeType('text/plain; charset=x-user-defined');
 	},
 		success: function(resdata){
 			logm("DBG",8,"getHttp",{url: url, len: reqdata.length, req: reqdata, res: resdata});
-			console.log("RES DATA: "+ toJs(resdata));
 			cbok(resdata);
 		},
 		error: cbfail
