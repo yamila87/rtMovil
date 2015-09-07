@@ -179,7 +179,7 @@ function getHttp(url,reqdata,cbok,cbfail) {
 	$.ajax({ url: url, data: reqdata,
 		cache: false,
 		dataType: 'text', //A: don't eval or process data
-		headers: { "Authorization": "Basic " + btoa( CfgUser + ":" + CfgPass) },
+		headers: { "Authorization": "Basic " + btoa( Cfg.User + ":" + Cfg.Pass) },
 		beforeSend: function (jqXHR, settings) { //A: for binary downloads
 	  jqXHR.overrideMimeType('text/plain; charset=x-user-defined');
 	},
