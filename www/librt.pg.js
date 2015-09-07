@@ -208,7 +208,7 @@ function evalFileOrDflt(name,failSilently,cbok,cbfail) {
 }
 
 function getHttpToDflt(fname,url,cbok,cbfail) {
-	console.log("EN GETHTTPTODLF");
+	console.log("EN GETHTTPTODLF" + fname +" "+url);
 	getHttp(url,{},function (d) { try {
 		var de= encriptar(d,SRC_KEY);
 		setFile(CFGLIB.pathToLib+CFGLIB.pathDfltInLib+fname,de,cbok,cbok);
@@ -227,9 +227,9 @@ CFG_APPURL_DFLT='https://10.70.251.64:8444/app/js';
 CFGLIB.appUrl= CFG_APPURL_DFLT;
 SRC_KEY= "18273hjsjacjhq83qq3dhsjdhdy38znddj";
 function runApp() { //XXX:generalizar usando evalUpdated
-	console.log("RUN APP "+ser_json(CFGLIB));
+	console.log("RUN APP "+CFGLIB.appUrl);
 	logm("DBG",1,"RUN APP "+ser_json(Cfg)+" "+ser_json(CFGLIB));
-	var s0= function () { conso.log("EN S0");getHttpToDflt('app.js',CFGLIB.appUrl,s1,s1); }
+	var s0= function () { console.log("EN S0");getHttpToDflt('app.js',CFGLIB.appUrl,s1,s1); }
 	var s1= function () { evalFile(CFGLIB.pathDfltInLib+'app.js',false,nullf,function (err) {
 		alert("Error iniciando paso 2, ingresó los datos correctos? ("+str(err)+")");
 		LibAppStarted= false; rtInit();
