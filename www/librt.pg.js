@@ -173,18 +173,19 @@ borrarTodo_dir= function (dirPath,quiereSinPedirConfirmacion,cb) {
 //S: http
 function getHttp(url,reqdata,cbok,cbfail) {
 
-	console.log("EN getHTTP" +url+" "+reqdata);
+	console.log("EN getHTTP " +url+" "+toJs(reqdata9);
 	cbfail=cbfail || onFail;
 	logm("DBG",8,"getHttp",{url: url, req: reqdata});
 	$.ajax({ url: url, data: reqdata,
 		cache: false,
 		dataType: 'text', //A: don't eval or process data
-		headers: { "Authorization": "Basic " + btoa( CfgUser + ":" + CfgPass) },
+		headers: { "Authorization": "Basic " + btoa( Cfg.User + ":" + Cfg.Pass) },
 		beforeSend: function (jqXHR, settings) { //A: for binary downloads
 	  jqXHR.overrideMimeType('text/plain; charset=x-user-defined');
 	},
 		success: function(resdata){
 			logm("DBG",8,"getHttp",{url: url, len: reqdata.length, req: reqdata, res: resdata});
+			console.log("RES DATA: "+ toJs(resdata));
 			cbok(resdata);
 		},
 		error: cbfail
@@ -245,8 +246,8 @@ function rtInit() {
 	//D: pantalla inicial ofreciendo Run, Run con debug (alerts) y bajarse la app
 	var con= $('#con'); con.html('');
 	var form= $('<div style="font-size: 2em; text-align: center;"/>'); con.append(form);
-	var iusr=$('<input placeholder="usuario">');
-	var ipass=$('<input placeholder="clave">');
+	var iusr=$('<input  placeholder="usuario">');
+	var ipass=$('<input  placeholder="clave">');
 	var iversion=$('<input placeholder="version">');
 	var bgo=$('<button>Iniciar</buton>');
 	var bgx=$('<button>Salir</buton>');
@@ -262,7 +263,9 @@ function rtInit() {
 		alert("Iniciando");
 		CFGLIB.appUrl= CFG_APPURL_DFLT;
 		CFGLIB.loglvlmax= 0;
+		console.log("USER: " + iusr.val() + " PASS"+ipass.val());
 		Cfg.User= iusr.val(); Cfg.Pass= ipass.val(); var iv= Cfg.VersionStr= iversion.val();
+		console.log( "CFG: "+ ser_json(Cfg) );
 		var m= /([^:]*):?([^:]*):?(\S*)/.exec(iv);
 		if (m[3]) { CFGLIB.appUrl= m[3]+'/js' }
 		var md;
