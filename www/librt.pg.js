@@ -203,15 +203,13 @@ CFGLIB.pathDfltInLib="a/";
 function evalFile(name,failSilently,cbok,cbfail) {
 	getFile(CFGLIB.pathToLib+name,"txt",function (srce) { try {
 		var src= encriptar_r(srce,SRC_KEY);
-
-		console.log("EVAL FILE: " + src);
 		var r= evalm(src+' //# sourceURL='+name,failSilently); cbok(r);
 	} catch (ex) { logm("ERR",1,"evalFile "+str(ex)); }},cbfail);
 }
 
 function evalFileOrDflt(name,failSilently,cbok,cbfail) {
 	var s0= function () { evalFile(name,failSilently,cbok,s1f); }
-	var s1f= function () { evalFile(CFGLIB.pathDfltInLib+name,failSilently,cbok,cbfail); }
+	var s1f= function () { console.log("EN S1F AAAA  eval de : " +CFGLIB.pathDfltInLib+name);evalFile(CFGLIB.pathDfltInLib+name,failSilently,cbok,cbfail); }
 	s0();
 }
 
