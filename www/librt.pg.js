@@ -202,7 +202,6 @@ CFGLIB.pathDfltInLib="a/";
 function evalFile(name,failSilently,cbok,cbfail) {
 	getFile(CFGLIB.pathToLib+name,"txt",function (srce) { try {
 		var src= encriptar_r(srce,SRC_KEY);
-		console.log("EVAL " + src);
 		var r= evalm(src+' //# sourceURL='+name,failSilently); cbok(r);
 	} catch (ex) { logm("ERR",1,"evalFile "+str(ex)); }},cbfail);
 }
