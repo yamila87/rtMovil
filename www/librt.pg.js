@@ -175,10 +175,6 @@ function getHttp(url,reqdata,cbok,cbfail) {
 
 	console.log("EN getHTTP " +url+" "+reqdata);
 
-	if(url.lastIndexOf("/app/js")<0){
-		url = url + "/app";
-	}
-
 	cbfail=cbfail || onFail;
 	logm("DBG",8,"getHttp",{url: url, req: reqdata});
 
