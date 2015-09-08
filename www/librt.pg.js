@@ -28,6 +28,7 @@ function evalm(src,failSilently) {
 	var r;
 	try { r = window.eval(src); logm("DBG",9,"EVALM",[r,src]); }
 	catch (ex) {
+		console.error("ERROR EN EVALM " + src);
 		logm("ERR",failSilently ? 9 : 0,"EVALM",[ex.message,src]);
 		if (!failSilently) { throw(ex); }
 	}
