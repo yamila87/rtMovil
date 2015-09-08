@@ -24,7 +24,7 @@ function str(x) {
 }
 
 function evalm(src,failSilently) {
-	console.log("ESTOY EN EVAL");
+	console.log("ESTOY EN EVALM ");
 	logm("DBG",9,"EVALM",src);
 	var r;
 	try { r = window.eval(src); logm("DBG",9,"EVALM",[r,src]); }
@@ -201,9 +201,11 @@ CFGLIB.pathToLib="pm/pg/";
 CFGLIB.pathDfltInLib="a/";
 
 function evalFile(name,failSilently,cbok,cbfail) {
+	console.log("EVAL FILE de " + name);
 	getFile(CFGLIB.pathToLib+name,"txt",function (srce) { try {
 		var src= encriptar_r(srce,SRC_KEY);
-		var r= evalm(src+' //# sourceURL='+name,failSilently); cbok(r);
+		var r= evalm(src+' //# sourceURL='+name,failSilently);
+		cbok(r);
 	} catch (ex) { logm("ERR",1,"evalFile "+str(ex)); }},cbfail);
 }
 
