@@ -24,6 +24,7 @@ function str(x) {
 }
 
 function evalm(src,failSilently) {
+	console.log("ESTOY EN EVAL");
 	logm("DBG",9,"EVALM",src);
 	var r;
 	try { r = window.eval(src); logm("DBG",9,"EVALM",[r,src]); }
@@ -202,6 +203,8 @@ CFGLIB.pathDfltInLib="a/";
 function evalFile(name,failSilently,cbok,cbfail) {
 	getFile(CFGLIB.pathToLib+name,"txt",function (srce) { try {
 		var src= encriptar_r(srce,SRC_KEY);
+
+		console.log("EVAL FILE: " + src);
 		var r= evalm(src+' //# sourceURL='+name,failSilently); cbok(r);
 	} catch (ex) { logm("ERR",1,"evalFile "+str(ex)); }},cbfail);
 }
