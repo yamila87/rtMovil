@@ -38,9 +38,7 @@ logm= GLOBAL.logm || function(t,lvl,msg,o) { //D: usar SOLO esta funcion de log 
 var Cache= { LibEval: {} };
 var LibWaiting= {};
 function libRequire(file,urlBase,url,cb) { //D: load js modules, call BEFORE using, asume async loading -> call dependent code from libStart that is always called AFTER loading all previously required modules
-    console.log("FILE: " + file);
-    console.log("URLBASE: " +urlBase);
-    console.log("url: " + url);
+console.log("LIBREQUIRE");
     url= url || (urlBase+file);
     var needsEval= true;
     function processData(response) {
@@ -58,7 +56,10 @@ function libRequire(file,urlBase,url,cb) { //D: load js modules, call BEFORE usi
     }
 
     LibWaiting[url]= url;
-    if (Cache.LibEval[url]) { processData(Cache.LibEval[url]) }
+    if (Cache.LibEval[url])
+    {
+        processData(Cache.LibEval[url])
+    }
     else {
             if (enAppMovil) { //A: mobile, para que funcione offline Y online
                 DBG.run && alert("DBG:libRequire load with app");

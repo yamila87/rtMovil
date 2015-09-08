@@ -235,11 +235,19 @@ SRC_KEY= "18273hjsjacjhq83qq3dhsjdhdy38znddj";
 function runApp() { //XXX:generalizar usando evalUpdated
 	console.log("RUN APP "+CFGLIB.appUrl);
 	logm("DBG",1,"RUN APP "+ser_json(Cfg)+" "+ser_json(CFGLIB));
-	var s0= function () { console.log("EN S0  "  + CFGLIB.appUrl );getHttpToDflt('app.js',CFGLIB.appUrl,s1,s1); }
-	var s1= function () { evalFile(CFGLIB.pathDfltInLib+'app.js',false,nullf,function (err) {
-		alert("Error iniciando paso 2, ingresó los datos correctos? ("+str(err)+")");
-		LibAppStarted= false; rtInit();
-	}); }
+	var s0= function () {
+				console.log("EN S0  "  + CFGLIB.appUrl );
+				getHttpToDflt('app.js',CFGLIB.appUrl,s1,s1);
+			}
+
+	var s1= function () {
+			evalFile(CFGLIB.pathDfltInLib+'app.js',false,nullf,function (err) {
+						alert("Error iniciando paso 2, ingresó los datos correctos? ("+str(err)+")");
+						LibAppStarted= false;
+						rtInit();
+						}
+					);
+		}
 	setFileDir(CFGLIB.pathToLib+CFGLIB.pathDfltInLib,s0,onFailAlert);
 }
 
