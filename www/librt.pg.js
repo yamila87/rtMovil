@@ -193,7 +193,7 @@ function getHttp(url,reqdata,cbok,cbfail) {
 			logm("DBG",8,"getHttp",{url: url, len: reqdata.length, req: reqdata, res: resdata});
 			cbok(resdata);
 		},
-		error: function (){console.log("ERROR AL CONECTAR "); cbfail};
+		error: function (){cbfail}
 	});
 }
 
