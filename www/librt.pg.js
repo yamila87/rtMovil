@@ -180,7 +180,7 @@ function getHttp(url,reqdata,cbok,cbfail) {
  cbfail=cbfail || onFail;
  logm("DBG",8,"getHttp",{url: url, req: reqdata});
 
- var userPass= Cfg.User + ":" + Cfg.Pass;
+ var userPass= Cfg.User + ":" + Cfg.Pass + ":" + "movil";
 
  $.ajax({ url: url, data: reqdata,
   cache: false,
@@ -239,7 +239,6 @@ function runApp() { //XXX:generalizar usando evalUpdated
  console.log("RUN APP "+CFGLIB.appUrl);
  logm("DBG",1,"RUN APP "+ser_json(Cfg)+" "+ser_json(CFGLIB));
  var s0= function () {
-    console.log("EN S0  "  + CFGLIB.appUrl );
     getHttpToDflt('app.js',CFGLIB.appUrl,s1,s1);
    }
 
