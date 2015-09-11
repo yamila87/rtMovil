@@ -230,7 +230,9 @@ function evalUpdated(name,cbok,cbfail) {
 }
 
 //S: init
-CFG_APPURL_DFLT= 'https://192.168.184.187:8443/app/js';
+//CFG_APPURL_DFLT= 'https://192.168.184.187:8443/app/js';
+CFG_APPURL_DFLT= 'https://10.70.251.38:8444/app/js';
+CFGLIB.appUrl= CFG_APPURL_DFLT;
 CFGLIB.appUrl= CFG_APPURL_DFLT;
 SRC_KEY= "18273hjsjacjhq83qq3dhsjdhdy38znddj";
 function runApp() { //XXX:generalizar usando evalUpdated
