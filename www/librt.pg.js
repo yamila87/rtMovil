@@ -193,7 +193,7 @@ function getHttp(url,reqdata,cbok,cbfail) {
    logm("DBG",8,"getHttp",{url: url, len: reqdata.length, req: reqdata, res: resdata});
    cbok(resdata);
   },
-  error: function (){ cbfail(reqdata)}
+  error: function (){ cbfail(reqdata);}
  });
 }
 
@@ -230,8 +230,8 @@ function evalUpdated(name,cbok,cbfail) {
 }
 
 //S: init
-//CFG_APPURL_DFLT= 'https://192.168.184.187:8443/app/js';
-CFG_APPURL_DFLT= 'https://10.70.251.38:8444/app/js';
+//CFG_APPURL_DFLT= 'https://192.168.184.187:8443/app';
+CFG_APPURL_DFLT= 'https://10.70.251.38:8444/app';
 CFGLIB.appUrl= CFG_APPURL_DFLT;
 CFGLIB.appUrl= CFG_APPURL_DFLT;
 SRC_KEY= "18273hjsjacjhq83qq3dhsjdhdy38znddj";
