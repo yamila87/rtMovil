@@ -268,9 +268,9 @@ function runApp() { //XXX:generalizar usando evalUpdated
           alert("Error iniciando paso 2, ingresó los datos correctos? ("+str(err)+")");
         }
 
-
-      LibAppStarted= false;
-      rtInit();  //vuelve al principio
+        alert("ANTES DE EJECUTAR");
+        LibAppStarted= false;
+        rtInit();  //vuelve al principio
       }
      );
   }
@@ -281,6 +281,7 @@ function runApp() { //XXX:generalizar usando evalUpdated
 ensureInit("LibAppStarted",false,this);
 ensureInit("Cfg",false,this);
 function rtInit() {
+ alert("INIT");
  if (LibAppStarted)
   { alert("ENTRO AL IF");return true; }
  LibAppStarted= true;
