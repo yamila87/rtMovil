@@ -181,7 +181,7 @@ function getHttp(url,reqdata,cbok,cbfail) {
 
  var userPass= Cfg.User + ":" + Cfg.Pass + ":" + "movil";
 
- $.ajax({ url: url, data: reqdata, timeout: 10000,
+ $.ajax({ url: url, data: reqdata,
   cache: false,
   dataType: 'text', //A: don't eval or process data
   headers: { "Authorization": "Basic " + btoa(userPass ) },
@@ -189,7 +189,6 @@ function getHttp(url,reqdata,cbok,cbfail) {
    jqXHR.overrideMimeType('text/plain; charset=x-user-defined');
  },
   success: function(resdata){
-   alert(" que tiene offLine " + offLine);
    logm("DBG",8,"getHttp",{url: url, len: reqdata.length, req: reqdata, res: resdata});
    cbok(resdata);
   },
@@ -198,9 +197,7 @@ function getHttp(url,reqdata,cbok,cbfail) {
     //error al conectarse
     if (!offLine){
       offLine = true;
-      alert(" que tiene offline despues del if " + offLine);
       alert (" No se pudo conectar a: " + url + " .Intentando Recuperar datos locales..." );
-      document.body.innerHTML="Iniciando modo offline... ";
     }
      cbfail(reqdata);
     }
