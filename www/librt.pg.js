@@ -281,7 +281,9 @@ function runApp() { //XXX:generalizar usando evalUpdated
 ensureInit("LibAppStarted",false,this);
 ensureInit("Cfg",false,this);
 function rtInit() {
- if (LibAppStarted) { return true; } LibAppStarted= true;
+ if (LibAppStarted)
+  { alert("ENTRO AL IF");return true; }
+ LibAppStarted= true;
  CFGLIB.loglvlmax=0;
  //D: pantalla inicial ofreciendo Run, Run con debug (alerts) y bajarse la app
  var con= $('#con'); con.html('');
@@ -319,22 +321,6 @@ function rtInit() {
  bgc.off('click').on('click',function () { borrarTodo_dir(CFGLIB.pathToLib,true,function () { alert("Los archivos locales han sido eliminados"); }); });
 }
 document.addEventListener("deviceready", rtInit, false);
-document.addEventListener("offline", isOffline(), false);
-document.addEventListener("online", isOnline(), false);
-
-
-
-function  isOffline() {
-
-  alert("ESTOY OFFLINE");
-}
-
-
-
-function  isOnline() {
-
-  alert("ESTOY OnLINE");
-}
 
 
 

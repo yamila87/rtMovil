@@ -303,6 +303,6 @@ var appHost= (enAppMovil && CFGLIB.appUrl) ? CFGLIB.appUrl.replace(/[^\/]+$/,"")
 var host= location.host ? "//"+location.host+"/app/" : appHost; //XXX: hack for phonegap, move inside libRequire, implement differently in each runtime
 DBG.run && alert("HOST '"+host+"'");
 
-if (document.body) { document.body.innerHTML="CARGANDO de "+appHost+"..."; } //XXX: generalzar, pantalla de inicio
+//if (document.body) { document.body.innerHTML="CARGANDO de "+appHost+"..."; } //XXX: generalzar, pantalla de inicio
 
 
