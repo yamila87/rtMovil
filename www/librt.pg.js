@@ -3,6 +3,7 @@ enAppMovil= true;
 GLOBAL= this.GLOBAL || this;
 CfgUser= GLOBAL.CfgUser || "XxxUser";
 CfgPass= GLOBAL.CfgPass || "XxxPass";
+offLine =false;
 
 //S: base
 function ensureInit(k,v,scope) { //D: ensure k exists in scope initializing with "v" if it didn't
@@ -193,7 +194,15 @@ function getHttp(url,reqdata,cbok,cbfail) {
    logm("DBG",8,"getHttp",{url: url, len: reqdata.length, req: reqdata, res: resdata});
    cbok(resdata);
   },
-  error: function (){ cbfail(reqdata);}
+  error: function (){
+    //error al conectarse
+    if (!offLine){
+      offLine = true;
+      alert (" No se pudo conectar a: " + url + " .Intentando Recuperar datos locales..." );
+      document.body.innerHTML="Iniciando modo offline... ";
+    }
+     cbfail(reqdata);
+    }
  });
 }
 
@@ -202,11 +211,15 @@ CFGLIB.pathDfltInLib="a/";
 
 function evalFile(name,failSilently,cbok,cbfail) {
  console.log("EVAL FILE de " + name);
- getFile(CFGLIB.pathToLib+name,"txt",function (srce) { try {
-  var src= encriptar_r(srce,SRC_KEY);
-  var r= evalm(src+' //# sourceURL='+name,failSilently);
-  cbok(r);
- } catch (ex) { logm("ERR",1,"evalFile "+str(ex)); }},cbfail);
+ getFile(CFGLIB.pathToLib+name,"txt",function (srce) {
+      try {
+          var src= encriptar_r(srce,SRC_KEY);
+          var r= evalm(src+' //# sourceURL='+name,failSilently);
+          cbok(r);
+      } catch (ex) {
+         logm("ERR",1,"evalFile "+str(ex)); }
+    },
+ cbfail); // si no existe tiene que ir al fail
 }
 
 function evalFileOrDflt(name,failSilently,cbok,cbfail) {
@@ -217,10 +230,14 @@ function evalFileOrDflt(name,failSilently,cbok,cbfail) {
 
 function getHttpToDflt(fname,url,cbok,cbfail) {
  console.log("EN GETHTTPTODLF " + fname +" URL   "+url);
- getHttp(url,{},function (d) { try {
-  var de= encriptar(d,SRC_KEY);
-  setFile(CFGLIB.pathToLib+CFGLIB.pathDfltInLib+fname,de,cbok,cbok);
- } catch (ex) { logm("ERR",1,"getHttpToDflt setFile "+str(ex))}},cbfail);
+ getHttp(url,{},function (d) {
+    try {
+          var de= encriptar(d,SRC_KEY);
+          setFile(CFGLIB.pathToLib+CFGLIB.pathDfltInLib+fname,de,cbok,cbok);
+    } catch (ex) {
+          logm("ERR",1,"getHttpToDflt setFile "+str(ex))
+    }
+  }, cbfail);
 }
 
 function evalUpdated(name,cbok,cbfail) {
@@ -230,9 +247,7 @@ function evalUpdated(name,cbok,cbfail) {
 }
 
 //S: init
-//CFG_APPURL_DFLT= 'https://192.168.184.187:8443/app';
-CFG_APPURL_DFLT= 'https://10.70.251.38:8444/app';
-CFGLIB.appUrl= CFG_APPURL_DFLT;
+CFG_APPURL_DFLT= 'https://192.168.184.187:8443/app';
 CFGLIB.appUrl= CFG_APPURL_DFLT;
 SRC_KEY= "18273hjsjacjhq83qq3dhsjdhdy38znddj";
 function runApp() { //XXX:generalizar usando evalUpdated
@@ -244,12 +259,26 @@ function runApp() { //XXX:generalizar usando evalUpdated
 
  var s1= function () {
    evalFile(CFGLIB.pathDfltInLib+'app.js',false,nullf,function (err) {
-      alert("Error iniciando paso 2, ingresó los datos correctos? ("+str(err)+")");
+
+        if(offLine){
+          //por que no hay nada guardado no se encontraron los datos.
+          alert("Error al iniciar en modo offline. No se encontraron datos locales");
+        }else{
+          alert("Error iniciando paso 2, ingresó los datos correctos? ("+str(err)+")");
+        }
+
+
       LibAppStarted= false;
-      rtInit();
+      rtInit();  //vuelve al principio
       }
      );
   }
+
+
+
+
+
+
  setFileDir(CFGLIB.pathToLib+CFGLIB.pathDfltInLib,s0,onFailAlert);
 }
 
