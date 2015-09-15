@@ -3,7 +3,7 @@ enAppMovil= true;
 GLOBAL= this.GLOBAL || this;
 CfgUser= GLOBAL.CfgUser || "XxxUser";
 CfgPass= GLOBAL.CfgPass || "XxxPass";
-offLine =false;
+var offLine =false;
 
 //S: base
 function ensureInit(k,v,scope) { //D: ensure k exists in scope initializing with "v" if it didn't
@@ -136,8 +136,12 @@ function setFile(path,data,cbok,cbfail) {
 function setFileBin(path,data,cbok,cbfail) { setFile(path,strToBin(data),cbok,cbfail); }
 
 function setFileDir(path,cbok,cbfail) {
+  alert("EN set FILE DIR");
+
  cbfail=cbfail ||onFail;
  var parts= path.split("/");
+
+ alert("parts: " + parts);
  var i= 0;
 
  window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onRequestFileSystemSuccess, cbfail);
@@ -175,7 +179,7 @@ borrarTodo_dir= function (dirPath,quiereSinPedirConfirmacion,cb) {
 
 //S: http
 function getHttp(url,reqdata,cbok,cbfail) {
-
+alert("EN HTTP ");
  console.log("EN getHTTP " +url+" "+reqdata);
 
  cbfail=cbfail || onFail;
@@ -191,13 +195,19 @@ function getHttp(url,reqdata,cbok,cbfail) {
    jqXHR.overrideMimeType('text/plain; charset=x-user-defined');
  },
   success: function(resdata){
+   alert("SE CONECTO OK");
+   alert(" que tiene offLine " + offLine);
    logm("DBG",8,"getHttp",{url: url, len: reqdata.length, req: reqdata, res: resdata});
    cbok(resdata);
   },
   error: function (){
+     alert("ERROR AL CONECTAR")
+     alert(" que tiene offLine " + offLine);
     //error al conectarse
     if (!offLine){
       offLine = true;
+      alert(" que tiene offline despues del if " + offLine);
+
       alert (" No se pudo conectar a: " + url + " .Intentando Recuperar datos locales..." );
       document.body.innerHTML="Iniciando modo offline... ";
     }
@@ -229,6 +239,7 @@ function evalFileOrDflt(name,failSilently,cbok,cbfail) {
 }
 
 function getHttpToDflt(fname,url,cbok,cbfail) {
+ alert("EN GETHTTPTODFLT : " + fname);
  console.log("EN GETHTTPTODLF " + fname +" URL   "+url);
  getHttp(url,{},function (d) {
     try {
@@ -273,11 +284,6 @@ function runApp() { //XXX:generalizar usando evalUpdated
       }
      );
   }
-
-
-
-
-
 
  setFileDir(CFGLIB.pathToLib+CFGLIB.pathDfltInLib,s0,onFailAlert);
 }
