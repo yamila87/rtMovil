@@ -287,8 +287,11 @@ function rtInit() {
  LibAppStarted= true;
  CFGLIB.loglvlmax=0;
  //D: pantalla inicial ofreciendo Run, Run con debug (alerts) y bajarse la app
- var con= $('#con'); con.html('');
- var form= $('<div style="font-size: 2em; text-align: center;"/>'); con.append(form);
+ alert("ANTES DE LOGIN");
+ var con= $('#con');
+ con.html('');
+ var form= $('<div style="font-size: 2em; text-align: center;"/>');
+ con.append(form);
  var iusr=$('<input placeholder="usuario">');
  var ipass=$('<input placeholder="clave">');
  var iversion=$('<input placeholder="version">');
