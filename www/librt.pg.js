@@ -264,8 +264,6 @@ function runApp() { //XXX:generalizar usando evalUpdated
         }else{
           alert("Error iniciando paso 2, ingresó los datos correctos? ("+str(err)+")");
         }
-
-        alert("ANTES DE EJECUTAR");
         LibAppStarted= false;
         rtInit();  //vuelve al principio
       }
@@ -278,13 +276,11 @@ function runApp() { //XXX:generalizar usando evalUpdated
 ensureInit("LibAppStarted",false,this);
 ensureInit("Cfg",false,this);
 function rtInit() {
- alert("INIT");
  if (LibAppStarted)
-  { alert("ENTRO AL IF");return true; }
+  { return true; }
  LibAppStarted= true;
  CFGLIB.loglvlmax=0;
  //D: pantalla inicial ofreciendo Run, Run con debug (alerts) y bajarse la app
- alert("ANTES DE LOGIN");
  var con= $('#con');
  con.html('');
  var form= $('<div style="font-size: 2em; text-align: center;"/>');
