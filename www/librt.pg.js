@@ -136,8 +136,6 @@ function setFile(path,data,cbok,cbfail) {
 function setFileBin(path,data,cbok,cbfail) { setFile(path,strToBin(data),cbok,cbfail); }
 
 function setFileDir(path,cbok,cbfail) {
-  alert("EN set FILE DIR");
-
  cbfail=cbfail ||onFail;
  var parts= path.split("/");
 
@@ -328,4 +326,4 @@ function rtInit() {
  bgx.off('click').on('click',function () { navigator.app.exitApp(); })
  bgc.off('click').on('click',function () { borrarTodo_dir(CFGLIB.pathToLib,true,function () { alert("Los archivos locales han sido eliminados"); }); });
 }
-document.addEventListener("deviceready", rtInit, false);
+//document.addEventListener("deviceready", rtInit, false);
