@@ -181,7 +181,7 @@ function getHttp(url,reqdata,cbok,cbfail) {
 
  var userPass= Cfg.User + ":" + Cfg.Pass + ":" + "movil";
 
- $.ajax({ url: url, data: reqdata,
+ $.ajax({ url: url, data: reqdata, timeout: 10000,
   cache: false,
   dataType: 'text', //A: don't eval or process data
   headers: { "Authorization": "Basic " + btoa(userPass ) },
