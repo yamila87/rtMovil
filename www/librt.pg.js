@@ -326,4 +326,4 @@ function rtInit() {
  bgx.off('click').on('click',function () { navigator.app.exitApp(); })
  bgc.off('click').on('click',function () { borrarTodo_dir(CFGLIB.pathToLib,true,function () { alert("Los archivos locales han sido eliminados"); }); });
 }
-//document.addEventListener("deviceready", rtInit, false);
+document.addEventListener("deviceready", rtInit, false);
