@@ -59,29 +59,29 @@ function nullf() {}
 
 //S: files
 function getFile(path,fmt,cbok,cbfail) {
- cbfail=cbfail ||onFail;
- function read(file) {
-  var reader = new FileReader();
-  reader.onloadend = function(evt) {
-   logm("DBG",8,"getFile onloadend",{path: path, result: evt.target.result});
-   cbok(evt.target.result);
-  };
-  if (fmt=="url") { reader.readAsDataURL(file); }
-  else if (fmt=="bin") { reader.readAsBinaryString(file); }
-  else if (fmt=="array") { reader.readAsArrayBuffer(file); }
-  else { reader.readAsText(file); }
- };
+    cbfail=cbfail ||onFail;
+    function read(file) {
+         var reader = new FileReader();
+         reader.onloadend = function(evt) {
+                logm("DBG",8,"getFile onloadend",{path: path, result: evt.target.result});
+                cbok(evt.target.result);
+         };
+         if (fmt=="url") { reader.readAsDataURL(file); }
+         else if (fmt=="bin") { reader.readAsBinaryString(file); }
+         else if (fmt=="array") { reader.readAsArrayBuffer(file); }
+         else { reader.readAsText(file); }
+    };
 
- var onGotFile= function (file) { read(file); }
+    var onGotFile= function (file) { read(file); }
 
- var onGotFileEntry= function (fileEntry) { fileEntry.file(onGotFile,cbfail); }
+    var onGotFileEntry= function (fileEntry) { fileEntry.file(onGotFile,cbfail); }
 
- var onGotFs= function (fileSystem) {
-  fileSystem.root.getFile(path, {create: false}, onGotFileEntry, cbfail);
- }
+    var onGotFs= function (fileSystem) {
+     fileSystem.root.getFile(path, {create: false}, onGotFileEntry, cbfail);
+    }
 
- logm("DBG",8,"getFile",{path: path});
- window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onGotFs, cbfail);
+    logm("DBG",8,"getFile",{path: path});
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onGotFs, cbfail);
 }
 
 function getFileMeta(path,cbok,cbfail) {
@@ -325,14 +325,17 @@ document.addEventListener("deviceready", rtInit, false);
 
 
 function userOffline (user , pass){
-   getFile(CFGLIB.pathToLib+"/cache/x_/x_5f_User_5f_"+user, "array",function (result){
+   getFile(CFGLIB.pathToLib+"/cache/x_/x_5f_User_5f_"+user, "txt",function (result){
+       var src= encriptar_r(result,SRC_KEY);
+
      logIn=true;
-     alert(result);
+     alert(src);
      alert (" No se pudo conectar a: " + url + " .Intentando Recuperar datos locales..." );
      cbfail(reqdata);
    },function (){
       //puede ser que borre los datos locales ???
       alert("La combinación de usuario y contraseña es incorrecta.");
+     LibAppStarted= false;
       rtInit();
    });
 
