@@ -4,7 +4,7 @@ GLOBAL= this.GLOBAL || this;
 CfgUser= GLOBAL.CfgUser || "XxxUser";
 CfgPass= GLOBAL.CfgPass || "XxxPass";
 var offLine =false;
-var longIn = false;
+var logIn = false;
 
 //S: base
 function ensureInit(k,v,scope) { //D: ensure k exists in scope initializing with "v" if it didn't
