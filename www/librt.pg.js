@@ -198,7 +198,7 @@ function getHttp(url,reqdata,cbok,cbfail) {
     if (!offLine){
       offLine = true;
       if(!logIn){
-       userOffline()
+       userOffline(Cfg.User , Cfg.Pass);
       }
     }
      cbfail(reqdata);
@@ -331,7 +331,6 @@ function userOffline (user , pass){
      alert (" No se pudo conectar a: " + url + " .Intentando Recuperar datos locales..." );
      cbfail(reqdata);
    },function (){
-
       //puede ser que borre los datos locales ???
       alert("La combinación de usuario y contraseña es incorrecta.");
       rtInit();
