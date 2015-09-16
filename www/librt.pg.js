@@ -4,6 +4,7 @@ GLOBAL= this.GLOBAL || this;
 CfgUser= GLOBAL.CfgUser || "XxxUser";
 CfgPass= GLOBAL.CfgPass || "XxxPass";
 var offLine =false;
+var longIn = false;
 
 //S: base
 function ensureInit(k,v,scope) { //D: ensure k exists in scope initializing with "v" if it didn't
@@ -197,10 +198,9 @@ function getHttp(url,reqdata,cbok,cbfail) {
     //error al conectarse
     if (!offLine){
       offLine = true;
-
-     //logIN;
-
-      alert (" No se pudo conectar a: " + url + " .Intentando Recuperar datos locales..." );
+      if(!logIn){
+       userOffline()
+      }
     }
      cbfail(reqdata);
     }
@@ -325,6 +325,7 @@ document.addEventListener("deviceready", rtInit, false);
 
 function userOffline (user , pass){
    getFile(CFGLIB.pathToLib+"/cache/x_/x_5f_User_5f_"+user, "array",function (result){
+     logIn=true;
      alert(result);
      alert (" No se pudo conectar a: " + url + " .Intentando Recuperar datos locales..." );
      cbfail(reqdata);
@@ -334,8 +335,6 @@ function userOffline (user , pass){
       alert("La combinación de usuario y contraseña es incorrecta.");
       rtInit();
    });
-
- getFile(path,fmt,cbok,cbfail)
 
 }
 
