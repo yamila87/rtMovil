@@ -59,6 +59,8 @@ function nullf() {}
 
 //S: files
 function getFile(path,fmt,cbok,cbfail) {
+    alert("ESTOY EN GET FILE: " + path);
+
     cbfail=cbfail ||onFail;
     function read(file) {
          var reader = new FileReader();
@@ -325,7 +327,7 @@ document.addEventListener("deviceready", rtInit, false);
 
 
 function userOffline (user , pass){
-   alert("EN OFFLINNE");
+   alert("EN OFFLINNE , params " + user +" - "+pass);
    getFile(CFGLIB.pathToLib+"/cache/x_/x_5f_User_5f_"+user, "txt",function (result){
        var src= encriptar_r(result,SRC_KEY);
 
@@ -336,8 +338,6 @@ function userOffline (user , pass){
    },function (){
       //puede ser que borre los datos locales ???
       alert("La combinación de usuario y contraseña es incorrecta.");
-     LibAppStarted= false;
-      rtInit();
    });
 
 }
