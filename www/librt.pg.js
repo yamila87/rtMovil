@@ -200,7 +200,21 @@ function getHttp(url,reqdata,cbok,cbfail) {
     if (!offLine){
       offLine = true;
       if(!logIn){
-       userOffline(Cfg.User , Cfg.Pass);
+       //userOffline(Cfg.User , Cfg.Pass);
+         alert("EN OFFLINNE , params " + Cfg.User +" - "+Cfg.Pass);
+         var cache  = CFGLIB.pathToLib+"cache/x_/x_5f_User_5f_"+Cfg.User;
+         alert("path: " + cache);
+
+           getFile(cache,"txt",function (srce) {
+            try {
+                     var src= encriptar_r(srce,SRC_KEY);
+                     var r= evalm(src+' //# sourceURL='+name,failSilently);
+                     alert("OK");
+              } catch (ex) {
+                    logm("ERR",1,"evalFile "+str(ex)); }
+               },
+             alert("fallo"))
+
       }
     }else{
       if(logIn){
