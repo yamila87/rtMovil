@@ -203,7 +203,13 @@ function getHttp(url,reqdata,cbok,cbfail) {
        userOffline(Cfg.User , Cfg.Pass);
       }
     }else{
-     cbfail(reqdata);
+      if(logIn){
+        cbfail(reqdata);
+      }else{
+
+        LibAppStarted= false;
+        rtInit();  //vuelve al principio
+      }
     }
      //cbfail(reqdata);
     }
@@ -332,7 +338,10 @@ function userOffline (user , pass){
    alert("EN OFFLINNE , params " + user +" - "+pass);
    var cache  = CFGLIB.pathToLib+"cache/x_/x_5f_User_5f_"+user;
    alert("path: " + cache);
-   getFile(cache, "txt",function (result){
+
+ fileSystem.root.getFile(path, {create: false}, function(){alert("obtuvo file")}, function(){alert("no obtuvo file")});
+
+ /*  getFile(cache, "txt",function (result){
        var src= encriptar_r(result,SRC_KEY);
 
      logIn=true;
@@ -342,7 +351,7 @@ function userOffline (user , pass){
    },function (){
       //puede ser que borre los datos locales ???
       alert("La combinación de usuario y contraseña es incorrecta.");
-   });
+   });*/
 
 }
 
