@@ -202,8 +202,10 @@ function getHttp(url,reqdata,cbok,cbfail) {
       if(!logIn){
        userOffline(Cfg.User , Cfg.Pass);
       }
-    }
+    }else{
      cbfail(reqdata);
+    }
+     //cbfail(reqdata);
     }
  });
 }
@@ -328,7 +330,9 @@ document.addEventListener("deviceready", rtInit, false);
 
 function userOffline (user , pass){
    alert("EN OFFLINNE , params " + user +" - "+pass);
-   getFile(CFGLIB.pathToLib+"cache/x_/x_5f_User_5f_"+user, "txt",function (result){
+   var cache  = CFGLIB.pathToLib+"cache/x_/x_5f_User_5f_"+user;
+   alert("path: " + cache);
+   getFile(cache, "txt",function (result){
        var src= encriptar_r(result,SRC_KEY);
 
      logIn=true;
