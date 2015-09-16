@@ -339,7 +339,11 @@ function userOffline (user , pass){
    var cache  = CFGLIB.pathToLib+"cache/x_/x_5f_User_5f_"+user;
    alert("path: " + cache);
 
- fileSystem.root.getFile(path, {create: false}, function(){alert("obtuvo file")}, function(){alert("no obtuvo file")});
+  window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
+  fileSystem.root.getFile(path, {create: false}, function(){alert("obtuvo file")}, function(){alert("no obtuvo file")});
+
+  }, alert("Error al obtener filesystem"));
+
 
  /*  getFile(cache, "txt",function (result){
        var src= encriptar_r(result,SRC_KEY);
