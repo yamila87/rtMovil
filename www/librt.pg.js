@@ -325,6 +325,7 @@ document.addEventListener("deviceready", rtInit, false);
 
 
 function userOffline (user , pass){
+   aler("EN OFFLINNE");
    getFile(CFGLIB.pathToLib+"/cache/x_/x_5f_User_5f_"+user, "txt",function (result){
        var src= encriptar_r(result,SRC_KEY);
 
