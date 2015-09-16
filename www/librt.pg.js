@@ -4,7 +4,7 @@ GLOBAL= this.GLOBAL || this;
 CfgUser= GLOBAL.CfgUser || "XxxUser";
 CfgPass= GLOBAL.CfgPass || "XxxPass";
 var offLine =false;
-var logIn = false;
+//var c
 
 //S: base
 function ensureInit(k,v,scope) { //D: ensure k exists in scope initializing with "v" if it didn't
@@ -181,7 +181,6 @@ function getHttp(url,reqdata,cbok,cbfail) {
  logm("DBG",8,"getHttp",{url: url, req: reqdata});
 
  var userPass= Cfg.User + ":" + Cfg.Pass + ":" + "movil";
-
  $.ajax({ url: url, data: reqdata,
   cache: false,
   dataType: 'text', //A: don't eval or process data
@@ -279,6 +278,8 @@ function runApp() { //XXX:generalizar usando evalUpdated
 ensureInit("LibAppStarted",false,this);
 ensureInit("Cfg",false,this);
 function rtInit() {
+
+ logIn =false;
  if (LibAppStarted)
   { return true; }
  LibAppStarted= true;
