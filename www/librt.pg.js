@@ -197,6 +197,9 @@ function getHttp(url,reqdata,cbok,cbfail) {
     //error al conectarse
     if (!offLine){
       offLine = true;
+
+     //logIN;
+
       alert (" No se pudo conectar a: " + url + " .Intentando Recuperar datos locales..." );
     }
      cbfail(reqdata);
@@ -320,4 +323,19 @@ function rtInit() {
 document.addEventListener("deviceready", rtInit, false);
 
 
+function userOffline (user , pass){
+   getFile(CFGLIB.pathToLib+"/cache/x_/x_5f_User_5f_"+user, "array",function (result){
+     alert(result);
+     alert (" No se pudo conectar a: " + url + " .Intentando Recuperar datos locales..." );
+     cbfail(reqdata);
+   },function (){
+
+      //puede ser que borre los datos locales ???
+      alert("La combinación de usuario y contraseña es incorrecta.");
+      rtInit();
+   });
+
+ getFile(path,fmt,cbok,cbfail)
+
+}
 
