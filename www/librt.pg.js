@@ -341,8 +341,8 @@ function userOffline (user , pass){
        //var src= encriptar_r(result,SRC_KEY);
         var jsonCfg = JSON.parse(result);
          alert(ser_json(jsonCfg));
-        if(user==jsonCfg.User){
-             if(pass=jsonCfg.Pass){
+        if(user==jsonCfg.user){
+             if(pass=jsonCfg.pass){
                alert("OK ENTRA");
                logIn=true;
              }
