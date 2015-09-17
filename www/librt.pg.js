@@ -207,6 +207,7 @@ function getHttp(url,reqdata,cbok,cbfail) {
 
               if(user==jsonCfg.user){
                   if(pass==jsonCfg.pass){
+                    alert("ENTRO ok");
                     logIn=true;
                     alert (" No se pudo conectar a: " + url + " .Intentando Recuperar datos locales..." );
                     cbfail(reqdata);
