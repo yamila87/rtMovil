@@ -203,6 +203,7 @@ function getHttp(url,reqdata,cbok,cbfail) {
        //userOffline(Cfg.User , Cfg.Pass, reqdata , cbfail);
           var cfgPath  = CFGLIB.pathToLib+"cfg";
           getFile(cfgPath, "txt",function (result){
+               alert("antes de encriptar: " + result);
               var src= encriptar_r(result,SRC_KEY);
            alert("dsenf " +src);
                var jsonCfg = JSON.parse(src);
