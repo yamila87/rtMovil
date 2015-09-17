@@ -309,7 +309,7 @@ ensureInit("LibAppStarted",false,this);
 ensureInit("Cfg",false,this);
 function rtInit() {
 
- //logIn =false;
+ logIn =false;
  if (LibAppStarted)
   { return true; }
  LibAppStarted= true;
