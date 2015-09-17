@@ -348,26 +348,19 @@ document.addEventListener("deviceready", rtInit, false);
 
 function userOffline (user , pass){
    alert("EN OFFLINNE , params " + user +" - "+pass);
-   var cache  = CFGLIB.pathToLib+"cache/x_/x_5f_User_5f_"+user;
-   alert("path: " + cache);
+   var cfgPath  = CFGLIB.pathToLib+"cfg";
 
-  window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
-  fileSystem.root.getFile(path, {create: false}, function(){alert("obtuvo file")}, function(){alert("no obtuvo file")});
-
-  }, alert("Error al obtener filesystem"));
-
-
- /*  getFile(cache, "txt",function (result){
-       var src= encriptar_r(result,SRC_KEY);
+   getFile(cfgPath, "txt",function (result){
+       //var src= encriptar_r(result,SRC_KEY);
 
      logIn=true;
-     alert(src);
+     alert(result);
      alert (" No se pudo conectar a: " + url + " .Intentando Recuperar datos locales..." );
      cbfail(reqdata);
    },function (){
       //puede ser que borre los datos locales ???
       alert("La combinación de usuario y contraseña es incorrecta.");
-   });*/
+   });
 
 }
 
