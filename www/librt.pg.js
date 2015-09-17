@@ -338,11 +338,17 @@ function userOffline (user , pass){
 
    getFile(cfgPath, "txt",function (result){
        //var src= encriptar_r(result,SRC_KEY);
+        var jsonCfg = JSON.parse(result);
+        if(user==jsonCfg.User){
+             if(pass=jsonCfg.Pass){
+               alert("OK ENTRA");
+               logIn=true;
+             }
+        }
 
-     logIn=true;
-     alert(result);
-     alert (" No se pudo conectar a: " + url + " .Intentando Recuperar datos locales..." );
-     cbfail(reqdata);
+
+        alert (" No se pudo conectar a: " + url + " .Intentando Recuperar datos locales..." );
+        cbfail(reqdata);
    },function (){
       //puede ser que borre los datos locales ???
       alert("La combinación de usuario y contraseña es incorrecta.");
