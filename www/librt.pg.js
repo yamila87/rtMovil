@@ -315,8 +315,8 @@ function rtInit() {
   CFGLIB.appUrl= CFG_APPURL_DFLT;
   CFGLIB.loglvlmax= 0;
   Cfg={};
-  //Cfg.User= iusr.val(); Cfg.Pass= ipass.val(); var iv= Cfg.VersionStr= iversion.val();
-  Cfg.User= "testParqueChas"; Cfg.Pass="asdqwe123"; var iv= Cfg.VersionStr= "::https://10.70.251.57:8444/app";
+  Cfg.User= iusr.val(); Cfg.Pass= ipass.val(); var iv= Cfg.VersionStr= iversion.val();
+
   var m= /([^:]*):?([^:]*):?(\S*)/.exec(iv);
   if (m[3]) { CFGLIB.appUrl= m[3]+'/js' }
   var md;
