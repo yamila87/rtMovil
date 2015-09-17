@@ -199,7 +199,7 @@ function getHttp(url,reqdata,cbok,cbfail) {
     if (!offLine){
       offLine = true;
       if(!logIn){
-        userOffline(Cfg.User , Cfg.Pass);
+        userOffline(Cfg.User , Cfg.Pass, reqdata , cbfail);
       }
     }else{
       if(logIn){
@@ -333,19 +333,15 @@ function rtInit() {
 document.addEventListener("deviceready", rtInit, false);
 
 
-function userOffline (user , pass){
-   alert("EN OFFLINNE , params " + user +" - "+pass);
+function userOffline (user , pass,reqdata,cbfail){
    var cfgPath  = CFGLIB.pathToLib+"cfg";
-
    getFile(cfgPath, "txt",function (result){
        //var src= encriptar_r(result,SRC_KEY);
         var jsonCfg = JSON.parse(result);
-         alert(ser_json(jsonCfg));
+
         if(user==jsonCfg.user){
              if(pass==jsonCfg.pass){
-               alert("OK ENTRA");
                logIn=true;
-
                alert (" No se pudo conectar a: " + url + " .Intentando Recuperar datos locales..." );
                cbfail(reqdata);
              }
