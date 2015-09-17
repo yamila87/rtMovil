@@ -199,16 +199,16 @@ function getHttp(url,reqdata,cbok,cbfail) {
     if (!offLine){
       alert("MODO OFFLINE");
       if(!logIn){
-        alert("LOGIN");
+
        //userOffline(Cfg.User , Cfg.Pass, reqdata , cbfail);
           var cfgPath  = CFGLIB.pathToLib+"cfg";
           getFile(cfgPath, "txt",function (result){
-            //var src= encriptar_r(result,SRC_KEY);
-               var jsonCfg = JSON.parse(result);
-                alert("JSON" + ser_json(jsonCfg) ) ;
+              var src= encriptar_r(result,SRC_KEY);
+               var jsonCfg = JSON.parse(src);
+
               if(Cfg.User==jsonCfg.user){
                   if(Cfg.Pass==jsonCfg.pass){
-                    alert("ENTRO ok");
+
                     logIn=true;
                     offLine = true;
                     alert (" No se pudo conectar a: " + url + " .Intentando Recuperar datos locales..." );
