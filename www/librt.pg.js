@@ -206,23 +206,21 @@ function getHttp(url,reqdata,cbok,cbfail) {
             //var src= encriptar_r(result,SRC_KEY);
                var jsonCfg = JSON.parse(result);
                 alert("JSON" + ser_json(jsonCfg) ) ;
-              if(user==jsonCfg.user){
-                  if(pass==jsonCfg.pass){
+              if(Cfg.User==jsonCfg.user){
+                  if(Cfg.Pass==jsonCfg.pass){
                     alert("ENTRO ok");
                     logIn=true;
                     offLine = true;
                     alert (" No se pudo conectar a: " + url + " .Intentando Recuperar datos locales..." );
                     cbfail(reqdata);
-                  }
-              }
 
-              if(!logIn){  alert("La combinación de usuario y contraseña es incorrecta."); }
+                  }else{  alert("La combinación de usuario y contraseña es incorrecta."); }
+              }else{  alert("La combinación de usuario y contraseña es incorrecta."); }
 
            },function (){
             //puede ser que borre los datos locales ???
             alert("Error al querer Iniciar sesion");
-           });
-
+           })
 
       }
     }else{
