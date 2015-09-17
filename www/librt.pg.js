@@ -59,8 +59,6 @@ function nullf() {}
 
 //S: files
 function getFile(path,fmt,cbok,cbfail) {
-    alert("ESTOY EN GET FILE: " + path);
-
     cbfail=cbfail ||onFail;
     function read(file) {
          var reader = new FileReader();
