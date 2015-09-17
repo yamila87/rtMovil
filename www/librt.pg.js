@@ -204,8 +204,9 @@ function getHttp(url,reqdata,cbok,cbfail) {
           var cfgPath  = CFGLIB.pathToLib+"cfg";
           getFile(cfgPath, "txt",function (result){
               var src= encriptar_r(result,SRC_KEY);
+           alert("dsenf " +src);
                var jsonCfg = JSON.parse(src);
-
+               alert("json " +ser_json(jsonCfg));
               if(Cfg.User==jsonCfg.user){
                   if(Cfg.Pass==jsonCfg.pass){
 
