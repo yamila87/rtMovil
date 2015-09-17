@@ -213,7 +213,7 @@ function getHttp(url,reqdata,cbok,cbfail) {
               } catch (ex) {
                     logm("ERR",1,"evalFile "+str(ex)); }
                },
-             alert("fallo"))
+             function (){alert("fallo get file")});
 
       }
     }else{
