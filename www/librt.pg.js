@@ -199,7 +199,28 @@ function getHttp(url,reqdata,cbok,cbfail) {
     if (!offLine){
       offLine = true;
       if(!logIn){
-        userOffline(Cfg.User , Cfg.Pass, reqdata , cbfail);
+       //userOffline(Cfg.User , Cfg.Pass, reqdata , cbfail);
+          var cfgPath  = CFGLIB.pathToLib+"cfg";
+          getFile(cfgPath, "txt",function (result){
+            //var src= encriptar_r(result,SRC_KEY);
+               var jsonCfg = JSON.parse(result);
+
+              if(user==jsonCfg.user){
+                  if(pass==jsonCfg.pass){
+                    logIn=true;
+                    alert (" No se pudo conectar a: " + url + " .Intentando Recuperar datos locales..." );
+                    cbfail(reqdata);
+                  }
+              }
+
+              if(!logIn){  alert("La combinación de usuario y contraseña es incorrecta."); }
+
+           },function (){
+            //puede ser que borre los datos locales ???
+            alert("Error al querer Iniciar sesion");
+           });
+
+
       }
     }else{
       if(logIn){
