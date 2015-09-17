@@ -1,4 +1,5 @@
 //INFO: quickly prototype/deploy apps using phonegap & loading from url/sdcard
+logIn=false;
 enAppMovil= true;
 GLOBAL= this.GLOBAL || this;
 CfgUser= GLOBAL.CfgUser || "XxxUser";
@@ -204,9 +205,8 @@ function getHttp(url,reqdata,cbok,cbfail) {
       if(logIn){
         cbfail(reqdata);
       }else{
-
-        LibAppStarted= false;
-        rtInit();  //vuelve al principio
+         LibAppStarted= false;
+         rtInit();  //vuelve al principio
       }
     }
      //cbfail(reqdata);
@@ -287,7 +287,7 @@ ensureInit("LibAppStarted",false,this);
 ensureInit("Cfg",false,this);
 function rtInit() {
 
- logIn =false;
+ //logIn =false;
  if (LibAppStarted)
   { return true; }
  LibAppStarted= true;
@@ -342,18 +342,20 @@ function userOffline (user , pass){
         var jsonCfg = JSON.parse(result);
          alert(ser_json(jsonCfg));
         if(user==jsonCfg.user){
-             if(pass=jsonCfg.pass){
+             if(pass==jsonCfg.pass){
                alert("OK ENTRA");
                logIn=true;
+
+               alert (" No se pudo conectar a: " + url + " .Intentando Recuperar datos locales..." );
+               cbfail(reqdata);
              }
         }
 
+         if(!logIn){  alert("La combinación de usuario y contraseña es incorrecta."); }
 
-        alert (" No se pudo conectar a: " + url + " .Intentando Recuperar datos locales..." );
-        cbfail(reqdata);
    },function (){
       //puede ser que borre los datos locales ???
-      alert("La combinación de usuario y contraseña es incorrecta.");
+      alert("Error al querer Iniciar sesion");
    });
 
 }
