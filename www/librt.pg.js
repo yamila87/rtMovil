@@ -5,6 +5,7 @@ GLOBAL= this.GLOBAL || this;
 CfgUser= GLOBAL.CfgUser || "XxxUser";
 CfgPass= GLOBAL.CfgPass || "XxxPass";
 var offLine =false;
+var message =" CARGANDO de "+appHost+"...";
 //var c
 
 //S: base
@@ -194,6 +195,7 @@ function getHttp(url,reqdata,cbok,cbfail) {
    cbok(resdata);
   },
   error: function (){
+     message= "Cargando datos locales ...";
      Cfg.online = false;
     //error al conectarse
     if (!offLine){
