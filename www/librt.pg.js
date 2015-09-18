@@ -60,29 +60,29 @@ function nullf() {}
 
 //S: files
 function getFile(path,fmt,cbok,cbfail) {
- cbfail=cbfail ||onFail;
- function read(file) {
-  var reader = new FileReader();
-  reader.onloadend = function(evt) {
-   logm("DBG",8,"getFile onloadend",{path: path, result: evt.target.result});
-   cbok(evt.target.result);
-  };
-  if (fmt=="url") { reader.readAsDataURL(file); }
-  else if (fmt=="bin") { reader.readAsBinaryString(file); }
-  else if (fmt=="array") { reader.readAsArrayBuffer(file); }
-  else { reader.readAsText(file); }
- };
+    cbfail=cbfail ||onFail;
+    function read(file) {
+         var reader = new FileReader();
+         reader.onloadend = function(evt) {
+                logm("DBG",8,"getFile onloadend",{path: path, result: evt.target.result});
+                cbok(evt.target.result);
+         };
+         if (fmt=="url") { reader.readAsDataURL(file); }
+         else if (fmt=="bin") { reader.readAsBinaryString(file); }
+         else if (fmt=="array") { reader.readAsArrayBuffer(file); }
+         else { reader.readAsText(file); }
+    };
 
- var onGotFile= function (file) { read(file); }
+    var onGotFile= function (file) { read(file); }
 
- var onGotFileEntry= function (fileEntry) { fileEntry.file(onGotFile,cbfail); }
+    var onGotFileEntry= function (fileEntry) { fileEntry.file(onGotFile,cbfail); }
 
- var onGotFs= function (fileSystem) {
-  fileSystem.root.getFile(path, {create: false}, onGotFileEntry, cbfail);
- }
+    var onGotFs= function (fileSystem) {
+     fileSystem.root.getFile(path, {create: false}, onGotFileEntry, cbfail);
+    }
 
- logm("DBG",8,"getFile",{path: path});
- window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onGotFs, cbfail);
+    logm("DBG",8,"getFile",{path: path});
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onGotFs, cbfail);
 }
 
 function getFileMeta(path,cbok,cbfail) {
@@ -242,9 +242,9 @@ function evalFile(name,failSilently,cbok,cbfail) {
  console.log("EVAL FILE de " + name);
  getFile(CFGLIB.pathToLib+name,"txt",function (srce) {
       try {
-  var src= encriptar_r(srce,SRC_KEY);
-  var r= evalm(src+' //# sourceURL='+name,failSilently);
-  cbok(r);
+          var src= encriptar_r(srce,SRC_KEY);
+          var r= evalm(src+' //# sourceURL='+name,failSilently);
+          cbok(r);
       } catch (ex) {
          logm("ERR",1,"evalFile "+str(ex)); }
     },
@@ -261,8 +261,8 @@ function getHttpToDflt(fname,url,cbok,cbfail) {
  console.log("EN GETHTTPTODLF " + fname +" URL   "+url);
  getHttp(url,{},function (d) {
     try {
-  var de= encriptar(d,SRC_KEY);
-  setFile(CFGLIB.pathToLib+CFGLIB.pathDfltInLib+fname,de,cbok,cbok);
+          var de= encriptar(d,SRC_KEY);
+          setFile(CFGLIB.pathToLib+CFGLIB.pathDfltInLib+fname,de,cbok,cbok);
     } catch (ex) {
           logm("ERR",1,"getHttpToDflt setFile "+str(ex))
     }
@@ -293,9 +293,9 @@ function runApp() { //XXX:generalizar usando evalUpdated
           //por que no hay nada guardado no se encontraron los datos.
           alert("Error al iniciar en modo offline. No se encontraron datos locales");
         }else{
-      alert("Error iniciando paso 2, ingresó los datos correctos? ("+str(err)+")");
+          alert("Error iniciando paso 2, ingresó los datos correctos? ("+str(err)+")");
         }
-      LibAppStarted= false;
+        LibAppStarted= false;
         rtInit();  //vuelve al principio
       }
      );
@@ -352,3 +352,28 @@ function rtInit() {
  bgc.off('click').on('click',function () { borrarTodo_dir(CFGLIB.pathToLib,true,function () { alert("Los archivos locales han sido eliminados"); }); });
 }
 document.addEventListener("deviceready", rtInit, false);
+
+
+function userOffline (user , pass,reqdata,cbfail){
+   var cfgPath  = CFGLIB.pathToLib+"cfg";
+   getFile(cfgPath, "txt",function (result){
+       //var src= encriptar_r(result,SRC_KEY);
+        var jsonCfg = JSON.parse(result);
+
+        if(user==jsonCfg.user){
+             if(pass==jsonCfg.pass){
+               logIn=true;
+               alert (" No se pudo conectar a: " + url + " .Intentando Recuperar datos locales..." );
+               cbfail(reqdata);
+             }
+        }
+
+         if(!logIn){  alert("La combinación de usuario y contraseña es incorrecta."); }
+
+   },function (){
+      //puede ser que borre los datos locales ???
+      alert("Error al querer Iniciar sesion");
+   });
+
+}
+
