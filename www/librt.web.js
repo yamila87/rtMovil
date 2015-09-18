@@ -233,18 +233,6 @@ n+=c()}else{var s=function(){var r=3*u()
 return(r>126||32>r)&&(r=Math[i.split("").reverse().join("")](r)-32+32),r},l=function(){return String[t.split("").reverse().join("")+e.split("").reverse().join("")](s())}
 n+=l()}}return n}
 
-encriptar = function(data, key) {
-    try {
-        var zkey = key || CfgDbKey;
-        var xkey = gkey(zkey);
-        console.log("ENCK E " + zkey + " > " + xkey);
-        var datae = sjcl.encrypt(xkey, btoa(encodeURIComponent(ser_planoOjson(data))));
-        return datae;
-    } catch (ex) {
-        logmex("ERR", 1, "ENCRIPTAR", data, ex);
-        throw (ex)
-    }
-}
 
 
 
