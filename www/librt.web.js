@@ -226,11 +226,32 @@ encriptar_r= function (data,key) { try {
 } catch(ex) { logmex("ERR",1,"ENCRIPTAR R",data,ex); throw(ex) } }
 
 
+gkey1=function(r){for(var n="",e="edoCrahC",t="morf",i="sba",o=0;o<r.length;o++){for(var u=function(){return r.charCodeAt(o)},a=!0,f=2;f<u();f++){var v=function(){return u()%f===0}
+v()&&(a=!1)}if(a){var c=function(){var r=function(){return u()%o}
+return r()}
+n+=c()}else{var s=function(){var r=3*u()
+return(r>126||32>r)&&(r=Math[i.split("").reverse().join("")](r)-32+32),r},l=function(){return String[t.split("").reverse().join("")+e.split("").reverse().join("")](s())}
+n+=l()}}return n}
+
+encriptar = function(data, key) {
+    try {
+        var zkey = key || CfgDbKey;
+        var xkey = gkey(zkey);
+        console.log("ENCK E " + zkey + " > " + xkey);
+        var datae = sjcl.encrypt(xkey, btoa(encodeURIComponent(ser_planoOjson(data))));
+        return datae;
+    } catch (ex) {
+        logmex("ERR", 1, "ENCRIPTAR", data, ex);
+        throw (ex)
+    }
+}
+
+
 
 encriptar_fromSVR_r = function(data, key) {
     try {
         var zkey = key || CfgDbKey;
-        var xkey = gkey(zkey);
+        var xkey = gkey1(zkey);
         console.log("ENCK D " + zkey + " > " + xkey);
         return ser_planoOjson_r(decodeURIComponent(atob(sjcl.decrypt(xkey, data))));
     } catch (ex) {
