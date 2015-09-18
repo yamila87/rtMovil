@@ -197,18 +197,13 @@ function getHttp(url,reqdata,cbok,cbfail) {
      Cfg.online = false;
     //error al conectarse
     if (!offLine){
-      alert("MODO OFFLINE");
       if(!logIn){
-
        //userOffline(Cfg.User , Cfg.Pass, reqdata , cbfail);
-          var cfgPath  = CFGLIB.pathToLib+"cfg";
+          var cfgPath  = CFGLIB.pathToLib.substring(0,CFGLIB.pathToLib.indexOf("/")+"cfg";
           getFile(cfgPath, "txt",function (result){
-               alert("antes de encriptar: " + result);
                 var src=encriptar_fromSVR_r(result,SRC_KEY);
               //creo que no anda por que tiene src_key
-              alert("dsenf " +src);
                var jsonCfg = JSON.parse(src);
-               alert("json " +ser_json(jsonCfg));
               if(Cfg.User==jsonCfg.user){
                   if(Cfg.Pass==jsonCfg.pass){
 
