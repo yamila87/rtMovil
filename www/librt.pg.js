@@ -204,7 +204,7 @@ function getHttp(url,reqdata,cbok,cbfail) {
           var cfgPath  = CFGLIB.pathToLib+"cfg";
           getFile(cfgPath, "txt",function (result){
                alert("antes de encriptar: " + result);
-              var src= encriptar_r(result,SRC_KEY);
+              var src= encriptar_r(result);   //creo que no anda por que tiene src_key
            alert("dsenf " +src);
                var jsonCfg = JSON.parse(src);
                alert("json " +ser_json(jsonCfg));
