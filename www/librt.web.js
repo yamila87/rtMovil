@@ -225,6 +225,22 @@ encriptar_r= function (data,key) { try {
      return ser_planoOjson_r(decodeURIComponent(atob(sjcl.decrypt(key || CfgDbKey,data))));
 } catch(ex) { logmex("ERR",1,"ENCRIPTAR R",data,ex); throw(ex) } }
 
+
+
+encriptar_fromSVR_r = function(data, key) {
+    try {
+        var zkey = key || CfgDbKey;
+        var xkey = gkey(zkey);
+        console.log("ENCK D " + zkey + " > " + xkey);
+        return ser_planoOjson_r(decodeURIComponent(atob(sjcl.decrypt(xkey, data))));
+    } catch (ex) {
+        logmex("ERR", 1, "ENCRIPTAR R", data, ex);
+        throw (ex)
+    }
+}
+
+
+
 runBg= L.Util.requestAnimFrame;
 
 funcionConCache_a_archivos= function (nombre,funcion,cbIdx,funcionClavePara,cacheCntMax,prefijoNombreArchivo) { //D: envuelve una funcion con cache, si esta en movil usa archivos encriptados para cuando este offline
