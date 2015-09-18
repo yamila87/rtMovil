@@ -199,7 +199,7 @@ function getHttp(url,reqdata,cbok,cbfail) {
     if (!offLine){
       if(!logIn){
        //userOffline(Cfg.User , Cfg.Pass, reqdata , cbfail);
-          var cfgPath  = CFGLIB.pathToLib.substring(0,CFGLIB.pathToLib.indexOf("/")-1)+"cfg";
+          var cfgPath  = CFGLIB.pathToLib.substring(0,CFGLIB.pathToLib.indexOf("/"))+"/cfg";
           getFile(cfgPath, "txt",function (result){
                 var src=encriptar_fromSVR_r(result,SRC_KEY);
               //creo que no anda por que tiene src_key
