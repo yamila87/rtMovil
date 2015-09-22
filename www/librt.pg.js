@@ -190,16 +190,18 @@ function getHttp(url,reqdata,cbok,cbfail) {
    jqXHR.overrideMimeType('text/plain; charset=x-user-defined');
  },
   success: function(resdata){
+   logIn=true;
    logm("DBG",8,"getHttp",{url: url, len: reqdata.length, req: reqdata, res: resdata});
    cbok(resdata);
+
   },
   error: function (){
 
      Cfg.online = false;
     //error al conectarse
     if (!offLine){
+      offLine = true;
       if(!logIn){
-       //userOffline(Cfg.User , Cfg.Pass, reqdata , cbfail);
           var cfgPath  = CFGLIB.pathToLib.substring(0,CFGLIB.pathToLib.indexOf("/"))+"/cfg";
           getFile(cfgPath, "txt",function (result){
                 var src=encriptar_fromSVR_r(result,SRC_KEY);
@@ -209,7 +211,7 @@ function getHttp(url,reqdata,cbok,cbfail) {
                   if(Cfg.Pass==jsonCfg.pass){
 
                     logIn=true;
-                    offLine = true;
+
                     alert (" No se pudo conectar a: " + url + " .Intentando Recuperar datos locales..." );
                     cbfail(reqdata);
 
@@ -307,7 +309,7 @@ function runApp() { //XXX:generalizar usando evalUpdated
 ensureInit("LibAppStarted",false,this);
 ensureInit("Cfg",false,this);
 function rtInit() {
-
+ offLine=false;
  logIn =false;
  if (LibAppStarted)
   { return true; }
@@ -354,26 +356,4 @@ function rtInit() {
 document.addEventListener("deviceready", rtInit, false);
 
 
-function userOffline (user , pass,reqdata,cbfail){
-   var cfgPath  = CFGLIB.pathToLib+"cfg";
-   getFile(cfgPath, "txt",function (result){
-       //var src= encriptar_r(result,SRC_KEY);
-        var jsonCfg = JSON.parse(result);
-
-        if(user==jsonCfg.user){
-             if(pass==jsonCfg.pass){
-               logIn=true;
-               alert (" No se pudo conectar a: " + url + " .Intentando Recuperar datos locales..." );
-               cbfail(reqdata);
-             }
-        }
-
-         if(!logIn){  alert("La combinación de usuario y contraseña es incorrecta."); }
-
-   },function (){
-      //puede ser que borre los datos locales ???
-      alert("Error al querer Iniciar sesion");
-   });
-
-}
 
