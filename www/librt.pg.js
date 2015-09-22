@@ -190,10 +190,9 @@ function getHttp(url,reqdata,cbok,cbfail) {
    jqXHR.overrideMimeType('text/plain; charset=x-user-defined');
  },
   success: function(resdata){
-   logIn=true;
    logm("DBG",8,"getHttp",{url: url, len: reqdata.length, req: reqdata, res: resdata});
+   logIn =true;
    cbok(resdata);
-
   },
   error: function (){
 
@@ -211,7 +210,6 @@ function getHttp(url,reqdata,cbok,cbfail) {
                   if(Cfg.Pass==jsonCfg.pass){
 
                     logIn=true;
-
                     alert (" No se pudo conectar a: " + url + " .Intentando Recuperar datos locales..." );
                     cbfail(reqdata);
 
@@ -293,7 +291,7 @@ function runApp() { //XXX:generalizar usando evalUpdated
 
         if(offLine){
           //por que no hay nada guardado no se encontraron los datos.
-          alert("Error al iniciar en modo offline. No se encontraron datos locales");
+          alert("No se encontraron datos locales. No se puede ingresar sin conexión a la red");
         }else{
           alert("Error iniciando paso 2, ingresó los datos correctos? ("+str(err)+")");
         }
@@ -354,6 +352,4 @@ function rtInit() {
  bgc.off('click').on('click',function () { borrarTodo_dir(CFGLIB.pathToLib,true,function () { alert("Los archivos locales han sido eliminados"); }); });
 }
 document.addEventListener("deviceready", rtInit, false);
-
-
 
