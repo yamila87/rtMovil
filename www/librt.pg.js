@@ -215,15 +215,21 @@ function getHttp(url,reqdata,cbok,cbfail) {
 
                   }else
                    {
-                     alert("La combinación de usuario y contraseña es incorrecta."); rtInit();
+                     alert("La combinación de usuario y contraseña es incorrecta.");
                    }
               }
                else{
-                   alert("La combinación de usuario y contraseña es incorrecta.");rtInit();
+                   alert("La combinación de usuario y contraseña es incorrecta.");
                }
 
+                 if(!logIn){
+                   alert("aaaaaaa");
+                 LibAppStarted=false;
+                  rtInit();
+                 }
+
            },function (){
-            //puede ser que borre los datos locales ???
+            //puede ser que no tenga el cfg
             alert("Error al querer Iniciar sesion");
            })
 
