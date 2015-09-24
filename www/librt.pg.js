@@ -223,14 +223,13 @@ function getHttp(url,reqdata,cbok,cbfail) {
                }
 
                  if(!logIn){
-                   alert("aaaaaaa");
-                 LibAppStarted=false;
+                  //LibAppStarted=false;
                   rtInit();
                  }
 
            },function (){
             //puede ser que no tenga el cfg
-            alert("Error al querer Iniciar sesion");
+            alert("Error al querer Iniciar sesion. Para ingresar por primera vez debe estar conectado a la red. ");
            })
 
       }
@@ -336,10 +335,10 @@ function rtInit() {
  var bgo=$('<button>Iniciar</buton>');
  var bgx=$('<button>Salir</buton>');
  var bgc=$('<a href="#">(borrar datos locales)</a>');
- form.append(iusr).append("<br>");
- form.append(ipass).append("<br>");
- form.append(iversion).append("<br>");
- form.append(bgo).append("<br>");
+ form.append(iusr).append("<br><br>");
+ form.append(ipass).append("<br><br>");
+ form.append(iversion).append("<br><br><br>");
+ form.append(bgo).append("<br><br>");
  form.append(bgx).append("<br><br><br>");
  form.append(bgc);
 
