@@ -96,13 +96,20 @@ function getFileMeta(path,cbok,cbfail) {
 }
 
 function keysFile(dirPath,cb) {
+ alert("keysFile - dirPath = " + dirPath );
  window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, fsSuccess, onFail);
 
  function fsSuccess(fs) {
   logm("DBG",9,"keysFile gotfs",[dirPath,fs.root]); try {
+   //A: hago backup de la variable fs.root.fullPath, porque sino se pisa y crea carpetas pm donde no debería
+   var bkp = fs.root.fullPath;
+
    if (dirPath) { fs.root.fullPath= dirPath; } //A: cd //XXX: NO usar O restaurar, PERSISTE PARA OTRAS LLAMADAS!!!
-   var directoryReader = fs.root.createReader()
+   var directoryReader = fs.root.createReader();
    directoryReader.readEntries(cb,cb);
+
+   //A:restauro variable fs.root.fullPath con el valor que tenía originalmente
+   fs.root.fullPath = bkp;
   } catch (ex) { logm("ERR",7,"keysFile gotfs",[dirPath,ex.message]); }
  }
 }
