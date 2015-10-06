@@ -259,8 +259,8 @@ function evalFile(name,failSilently,cbok,cbfail) {
  console.log("EVAL FILE de " + name);
  getFile(CFGLIB.pathToLib+name,"txt",function (srce) {
       try {
-          var src= encriptar_r(srce,SRC_KEY);
-          var r= evalm(src+' //# sourceURL='+name,failSilently);
+        //  var src= encriptar_r(srce,SRC_KEY);
+          var r= evalm(srce+' //# sourceURL='+name,failSilently);
           cbok(r);
       } catch (ex) {
          logm("ERR",1,"evalFile "+str(ex)); }
