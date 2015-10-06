@@ -278,8 +278,8 @@ function getHttpToDflt(fname,url,cbok,cbfail) {
  console.log("EN GETHTTPTODLF " + fname +" URL   "+url);
  getHttp(url,{},function (d) {
     try {
-          var de= encriptar(d,SRC_KEY);
-          setFile(CFGLIB.pathToLib+CFGLIB.pathDfltInLib+fname,de,cbok,cbok);
+         // var de= encriptar(d,SRC_KEY);
+          setFile(CFGLIB.pathToLib+CFGLIB.pathDfltInLib+fname,d,cbok,cbok);
     } catch (ex) {
           logm("ERR",1,"getHttpToDflt setFile "+str(ex))
     }
@@ -313,7 +313,7 @@ function removeFile(path, cbok, cbfail){
 
 //S: Lee archivo local almacenada en particular sin la funcionalidad de caché
 function readLocalFile(path,params,cbok,cbfail) {
-    
+
     getFile(path, "txt",
             function(result) {cbok(result);},
             function(err) {
