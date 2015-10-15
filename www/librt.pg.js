@@ -209,9 +209,9 @@ function getHttp(url,reqdata,cbok,cbfail) {
       if(!logIn){
           var cfgPath  = CFGLIB.pathToLib.substring(0,CFGLIB.pathToLib.indexOf("/"))+"/cfg";
           getFile(cfgPath, "txt",function (result){
-                var src=encriptar_fromSVR_r(result,SRC_KEY);
+                //var src=encriptar_fromSVR_r(result,SRC_KEY);
               //creo que no anda por que tiene src_key
-               var jsonCfg = JSON.parse(src);
+               var jsonCfg = JSON.parse(result);
               if(Cfg.User==jsonCfg.user){
                   if(Cfg.Pass==jsonCfg.pass){
 
@@ -278,8 +278,8 @@ function getHttpToDflt(fname,url,cbok,cbfail) {
  console.log("EN GETHTTPTODLF " + fname +" URL   "+url);
  getHttp(url,{},function (d) {
     try {
-          var de= encriptar(d,SRC_KEY);
-          setFile(CFGLIB.pathToLib+CFGLIB.pathDfltInLib+fname,de,cbok,cbok);
+          //var de= encriptar(d,SRC_KEY);
+          setFile(CFGLIB.pathToLib+CFGLIB.pathDfltInLib+fname,d,cbok,cbok);
     } catch (ex) {
           logm("ERR",1,"getHttpToDflt setFile "+str(ex))
     }
@@ -313,7 +313,7 @@ function removeFile(path, cbok, cbfail){
 
 //S: Lee archivo local almacenada en particular sin la funcionalidad de caché
 function readLocalFile(path,params,cbok,cbfail) {
-    
+
     getFile(path, "txt",
             function(result) {cbok(result);},
             function(err) {
