@@ -210,7 +210,6 @@ function getHttp(url,reqdata,cbok,cbfail) {
           var cfgPath  = CFGLIB.pathToLib.substring(0,CFGLIB.pathToLib.indexOf("/"))+"/cfg";
           getFile(cfgPath, "txt",function (result){
                 //var src=encriptar_fromSVR_r(result,SRC_KEY);
-              //creo que no anda por que tiene src_key
                var jsonCfg = JSON.parse(result);
               if(Cfg.User==jsonCfg.user){
                   if(Cfg.Pass==jsonCfg.pass){
@@ -259,8 +258,8 @@ function evalFile(name,failSilently,cbok,cbfail) {
  console.log("EVAL FILE de " + name);
  getFile(CFGLIB.pathToLib+name,"txt",function (srce) {
       try {
-          var src= encriptar_r(srce,SRC_KEY);
-          var r= evalm(src+' //# sourceURL='+name,failSilently);
+          //var src= encriptar_r(srce,SRC_KEY);
+          var r= evalm(srce+' //# sourceURL='+name,failSilently);
           cbok(r);
       } catch (ex) {
          logm("ERR",1,"evalFile "+str(ex)); }
