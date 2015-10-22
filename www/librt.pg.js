@@ -376,6 +376,8 @@ function rtInit() {
 
    var loginCont = $("#con");
   loginCont.html('');
+
+ /*
   var cont = $("<div>",{class:"container-fluid"}).appendTo(loginCont);
   var row = $("<div>",{class:"row-fluid"}).appendTo(cont);
   var col = $("<div>",{class:"span8"}).appendTo(row);
@@ -393,6 +395,7 @@ function rtInit() {
   var bgx =$("<button>",{class:"btn btn-danger btn-md ",text:"salir"}).appendTo(group4);
   var group5 =$("<div>",{class:"form-group"}).appendTo(form);
   var bgc =$("<a>",{class:"btn-link",text:"borrar datos locales"}).appendTo(group5);
+  */
 
 /*
 
@@ -413,6 +416,27 @@ function rtInit() {
  form.append(bgo).append("<br><br>");
  form.append(bgx).append("<br><br><br>");
  form.append(bgc); */
+
+
+  //D: pantalla inicial ofreciendo Run, Run con debug (alerts) y bajarse la app
+ var con= $('#con');
+ con.html('');
+ var form= $('<div class="form"/>');
+ con.append(form);
+ var iusr=$('<input class="form-control input-sm chat-input" placeholder="usuario" value="testParqueChas">');
+ var ipass=$('<input class="form-control input-sm chat-input" type="password" placeholder="clave" value="asd123">');
+ var iversion=$('<input class="form-control input-sm chat-input" placeholder="version" value="::https://10.70.251.40:8444/app">');
+ var bgo=$('<button class="btn btn-danger btn-md ">Iniciar</buton>');
+ var bgx=$('<button class="btn btn-danger btn-md " >Salir</buton>');
+ var bgc=$('<a class="btn-link" href="#">(borrar datos locales)</a>');
+ form.append(iusr).append("<br>");
+ form.append(ipass).append("<br>");
+ form.append(iversion).append("<br>");
+ form.append(bgo).append("<br><br>");
+ form.append(bgx).append("<br><br>");
+ form.append(bgc);
+
+
 
  bgo.off('click').on('click',function () { try {
   alert("Iniciando");
