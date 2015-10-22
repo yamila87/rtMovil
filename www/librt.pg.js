@@ -408,9 +408,10 @@ document.addEventListener("deviceready", rtInit, false);
 uiLogIn = function (){
 
   var loginCont = $("#login");
-  var cont = $("<div>",{class:"container"}).appendTo("body");
-  var row = $("<div>",{class:"row"}).appendTo(cont);
-  var col = $("<div>",{class:"col-md-3"}).appendTo(row);
+  loginCont.html('');
+  var cont = $("<div>",{class:"container-fluid"}).appendTo(loginCont);
+  var row = $("<div>",{class:"row-fluid"}).appendTo(cont);
+  var col = $("<div>",{class:"span8"}).appendTo(row);
 
   var form= $("<form>",{class:"form col-md-12 center-block"}).appendTo(col);
   var group =$("<div>",{class:"form-group"}).appendTo(form);
