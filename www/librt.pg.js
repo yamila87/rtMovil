@@ -183,7 +183,7 @@ borrarTodo_dir= function (dirPath,quiereSinPedirConfirmacion,cb) {
 
 //S: http
 function getHttp(url,reqdata,cbok,cbfail) {
- console.log("EN getHTTP " +url+" "+reqdata);
+ alert("EN getHTTP " +url+" "+reqdata);
  cbfail=cbfail || onFail;
  logm("DBG",8,"getHttp",{url: url, req: reqdata});
 
@@ -196,12 +196,15 @@ function getHttp(url,reqdata,cbok,cbfail) {
    jqXHR.overrideMimeType('text/plain; charset=x-user-defined');
  },
   success: function(resdata){
+   alert("ok");
+
    logm("DBG",8,"getHttp",{url: url, len: reqdata.length, req: reqdata, res: resdata});
    logIn =true;
    cbok(resdata);
   },
   error: function (){
 
+    alert("err");
      Cfg.online = false;
     //error al conectarse
     if (!offLine){
@@ -328,10 +331,12 @@ CFG_APPURL_DFLT= 'https://192.168.184.187:8443/app';
 CFGLIB.appUrl= CFG_APPURL_DFLT;
 SRC_KEY= "18273hjsjacjhq83qq3dhsjdhdy38znddj";
 function runApp() {
- alert("RUNN!");//XXX:generalizar usando evalUpdated
+ alert("RUNN! :" +CFGLIB.appUrl);//XXX:generalizar usando evalUpdated
  console.log("RUN APP "+CFGLIB.appUrl);
  logm("DBG",1,"RUN APP "+ser_json(Cfg)+" "+ser_json(CFGLIB));
  var s0= function () {
+   alert("a buscar https");
+
     getHttpToDflt('app.js',CFGLIB.appUrl,s1,s1);
    }
 
@@ -349,7 +354,7 @@ function runApp() {
       }
      );
   }
-
+ alert("antes del set");
  setFileDir(CFGLIB.pathToLib+CFGLIB.pathDfltInLib,s0,onFailAlert);
 }
 
