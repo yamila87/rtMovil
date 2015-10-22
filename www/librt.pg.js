@@ -355,6 +355,7 @@ function runApp() {
 
 ensureInit("LibAppStarted",false,this);
 ensureInit("Cfg",false,this);
+
 function rtInit() {
  offLine=false;
  logIn =false;

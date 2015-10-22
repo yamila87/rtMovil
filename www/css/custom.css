@@ -1,15 +1,15 @@
 @media all and (max-width: 1200px) { /* screen size until 1200px */
     body {
-        font-size: 1.8em; 
+        font-size: 1.6em; 
     }
 }
 @media all and (max-width: 1000px) { /* screen size until 1000px */
     body {
-        font-size: 2.0em; 
+        font-size: 1.8em; 
         }
     }
 @media all and (max-width: 500px) { /* screen size until 500px */
     body {
-        font-size: 2.5em; 
+        font-size: 2.0em; 
         }
     }
