@@ -407,13 +407,13 @@ document.addEventListener("deviceready", rtInit, false);
 
 uiLogIn = function (){
 
-  var loginCont = $("#login");
+  var loginCont = $("#con");
   loginCont.html('');
   var cont = $("<div>",{class:"container-fluid"}).appendTo(loginCont);
   var row = $("<div>",{class:"row-fluid"}).appendTo(cont);
   var col = $("<div>",{class:"span8"}).appendTo(row);
 
-  var form= $("<form>",{class:"form col-md-12 center-block"}).appendTo(col);
+  var form= $("<form>",{class:"form"}).appendTo(col);
   var group =$("<div>",{class:"form-group"}).appendTo(form);
   var user = $("<input>",{class:"form-control input-sm chat-input",placeholder:"usuario","value":"testParqueChas"}).appendTo(group);
   var group1 =$("<div>",{class:"form-group"}).appendTo(form);
