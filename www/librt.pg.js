@@ -144,6 +144,8 @@ function setFile(path,data,cbok,cbfail) {
 function setFileBin(path,data,cbok,cbfail) { setFile(path,strToBin(data),cbok,cbfail); }
 
 function setFileDir(path,cbok,cbfail) {
+
+ alert("set file, path: " + path);
  cbfail=cbfail ||onFail;
  var parts= path.split("/");
  var i= 0;
@@ -151,6 +153,8 @@ function setFileDir(path,cbok,cbfail) {
  window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onRequestFileSystemSuccess, cbfail);
 
  function onRequestFileSystemSuccess(fileSystem) {
+
+   alert("creo dir ok");
   if (parts.length==0) { cbok(fileSystem.root); }
   else {	createPart(fileSystem.root) }
  }
@@ -369,6 +373,7 @@ function rtInit() {
  LibAppStarted= true;
  CFGLIB.loglvlmax=0;
 
+/*
    var loginCont = $("#con");
   loginCont.html('');
   var cont = $("<div>",{class:"container-fluid"}).appendTo(loginCont);
@@ -409,12 +414,13 @@ alert("Cfg " + ser_json(Cfg));
 
  logout.off('click').on('click',function () { navigator.app.exitApp(); })
  link.off('click').on('click',function () { borrarTodo_dir(CFGLIB.pathToLib,true,function () { alert("Los archivos locales han sido eliminados"); }); });
+*/
 
 
 
 
  //D: pantalla inicial ofreciendo Run, Run con debug (alerts) y bajarse la app
-/* var con= $('#con');
+ var con= $('#con');
  con.html('');
  var form= $('<div style="font-size: 2em; text-align: center;"/>');
  con.append(form);
@@ -449,7 +455,7 @@ alert("Cfg " + ser_json(Cfg));
  } catch (ex) { alert("ERROR "+ex.message+" "+str(ex)) } });
 
  bgx.off('click').on('click',function () { navigator.app.exitApp(); })
- bgc.off('click').on('click',function () { borrarTodo_dir(CFGLIB.pathToLib,true,function () { alert("Los archivos locales han sido eliminados"); }); });*/
+ bgc.off('click').on('click',function () { borrarTodo_dir(CFGLIB.pathToLib,true,function () { alert("Los archivos locales han sido eliminados"); }); });
 }
 document.addEventListener("deviceready", rtInit, false);
 
