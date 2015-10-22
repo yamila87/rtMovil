@@ -313,7 +313,7 @@ function removeFile(path, cbok, cbfail){
 
 //S: Lee archivo local almacenada en particular sin la funcionalidad de caché
 function readLocalFile(path,params,cbok,cbfail) {
-    
+
     getFile(path, "txt",
             function(result) {cbok(result);},
             function(err) {
@@ -361,8 +361,10 @@ function rtInit() {
   { return true; }
  LibAppStarted= true;
  CFGLIB.loglvlmax=0;
+ uiLogIn();
+
  //D: pantalla inicial ofreciendo Run, Run con debug (alerts) y bajarse la app
- var con= $('#con');
+/* var con= $('#con');
  con.html('');
  var form= $('<div style="font-size: 2em; text-align: center;"/>');
  con.append(form);
@@ -397,7 +399,55 @@ function rtInit() {
  } catch (ex) { alert("ERROR "+ex.message+" "+str(ex)) } });
 
  bgx.off('click').on('click',function () { navigator.app.exitApp(); })
- bgc.off('click').on('click',function () { borrarTodo_dir(CFGLIB.pathToLib,true,function () { alert("Los archivos locales han sido eliminados"); }); });
+ bgc.off('click').on('click',function () { borrarTodo_dir(CFGLIB.pathToLib,true,function () { alert("Los archivos locales han sido eliminados"); }); });*/
 }
 document.addEventListener("deviceready", rtInit, false);
+
+
+
+uiLogIn = function (){
+
+  var loginCont = $("#login");
+  var cont = $("<div>",{class:"container"}).appendTo("body");
+  var row = $("<div>",{class:"row"}).appendTo(cont);
+  var col = $("<div>",{class:"col-md-3"}).appendTo(row);
+
+  var form= $("<form>",{class:"form col-md-12 center-block"}).appendTo(col);
+  var group =$("<div>",{class:"form-group"}).appendTo(form);
+  var user = $("<input>",{class:"form-control input-sm chat-input",placeholder:"usuario","value":"testParqueChas"}).appendTo(group);
+  var group1 =$("<div>",{class:"form-group"}).appendTo(form);
+  var pass = $("<input>",{class:"form-control input-sm chat-input",placeholder:"password","value":"asd123"}).appendTo(group1);
+  var group2 =$("<div>",{class:"form-group"}).appendTo(form);
+  var version = $("<input>",{class:"form-control input-sm chat-input",placeholder:"version","value":"::https://10.70.251.55:8444/app"}).appendTo(group2);
+  var group3 =$("<div>",{class:"form-group"}).appendTo(form);
+  var login =$("<button>",{class:"btn btn-danger btn-md ",text:"Iniciar"}).appendTo(group3);
+  var group4 =$("<div>",{class:"form-group"}).appendTo(form);
+  var logout =$("<button>",{class:"btn btn-danger btn-md ",text:"salir"}).appendTo(group4);
+  var group5 =$("<div>",{class:"form-group"}).appendTo(form);
+  var link =$("<a>",{class:"btn-link",text:"borrar datos locales"}).appendTo(group5);
+
+ login.off('click').on('click',function () { try {
+  alert("Iniciando");
+  CFGLIB.appUrl= CFG_APPURL_DFLT;
+  CFGLIB.loglvlmax= 0;
+  Cfg={};
+  Cfg.User= user.val(); Cfg.Pass= pass.val(); var iv= Cfg.VersionStr= version.val();
+
+  var m= /([^:]*):?([^:]*):?(\S*)/.exec(iv);
+  if (m[3]) { CFGLIB.appUrl= m[3]+'/js' }
+  var md;
+  if (md= /d(\d?)/.exec(m[2])) { CFGLIB.loglvlmax= parseInt(md[1])||9; }
+  CFGLIB.appUrl+= m[1];
+  //XXX:SEC: cambiar PathToLib segun version para que no se pueda bajar una version de un host y acceder a los datos de otra? relacion con encriptar datos bajados?
+  //alert("Cfg "+ser_json(CFGLIB));
+  runApp(); //XXX: que hacemos si no se pudo iniciar app? hay que volver aca :)
+ } catch (ex) { alert("ERROR "+ex.message+" "+str(ex)) } });
+
+ logout.off('click').on('click',function () { navigator.app.exitApp(); })
+ link.off('click').on('click',function () { borrarTodo_dir(CFGLIB.pathToLib,true,function () { alert("Los archivos locales han sido eliminados"); }); });
+
+
+
+
+}
 
