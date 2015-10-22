@@ -373,7 +373,7 @@ function rtInit() {
  LibAppStarted= true;
  CFGLIB.loglvlmax=0;
 
-/*
+
    var loginCont = $("#con");
   loginCont.html('');
   var cont = $("<div>",{class:"container-fluid"}).appendTo(loginCont);
@@ -382,42 +382,19 @@ function rtInit() {
 
   var form= $("<form>",{class:"form"}).appendTo(col);
   var group =$("<div>",{class:"form-group"}).appendTo(form);
-  var user = $("<input>",{class:"form-control input-sm chat-input",placeholder:"usuario","value":"testParqueChas"}).appendTo(group);
+  var iusr = $("<input>",{class:"form-control input-sm chat-input",placeholder:"usuario","value":"testParqueChas"}).appendTo(group);
   var group1 =$("<div>",{class:"form-group"}).appendTo(form);
-  var pass = $("<input>",{class:"form-control input-sm chat-input",placeholder:"password","value":"asd123"}).appendTo(group1);
+  var ipass = $("<input>",{class:"form-control input-sm chat-input",placeholder:"password","value":"asd123"}).appendTo(group1);
   var group2 =$("<div>",{class:"form-group"}).appendTo(form);
-  var version = $("<input>",{class:"form-control input-sm chat-input",placeholder:"version","value":"::https://10.70.251.55:8444/app"}).appendTo(group2);
+  var iversion = $("<input>",{class:"form-control input-sm chat-input",placeholder:"version","value":"::https://10.70.251.55:8444/app"}).appendTo(group2);
   var group3 =$("<div>",{class:"form-group"}).appendTo(form);
-  var login =$("<button>",{class:"btn btn-danger btn-md ",text:"Iniciar"}).appendTo(group3);
+  var bgo =$("<button>",{class:"btn btn-danger btn-md ",text:"Iniciar"}).appendTo(group3);
   var group4 =$("<div>",{class:"form-group"}).appendTo(form);
-  var logout =$("<button>",{class:"btn btn-danger btn-md ",text:"salir"}).appendTo(group4);
+  var bgx =$("<button>",{class:"btn btn-danger btn-md ",text:"salir"}).appendTo(group4);
   var group5 =$("<div>",{class:"form-group"}).appendTo(form);
-  var link =$("<a>",{class:"btn-link",text:"borrar datos locales"}).appendTo(group5);
+  var bgc =$("<a>",{class:"btn-link",text:"borrar datos locales"}).appendTo(group5);
 
- login.off('click').on('click',function () { try {
-  alert("Iniciando");
-  CFGLIB.appUrl= CFG_APPURL_DFLT;
-  CFGLIB.loglvlmax= 0;
-  Cfg={};
-  Cfg.User= user.val(); Cfg.Pass= pass.val(); var iv= Cfg.VersionStr= version.val();
-alert("Cfg " + ser_json(Cfg));
-
-  var m= /([^:]*):?([^:]*):?(\S*)/.exec(iv);
-  if (m[3]) { CFGLIB.appUrl= m[3]+'/js' }
-  var md;
-  if (md= /d(\d?)/.exec(m[2])) { CFGLIB.loglvlmax= parseInt(md[1])||9; }
-  CFGLIB.appUrl+= m[1];
-  //XXX:SEC: cambiar PathToLib segun version para que no se pueda bajar una version de un host y acceder a los datos de otra? relacion con encriptar datos bajados?
-  //alert("Cfg "+ser_json(CFGLIB));
-  runApp(); //XXX: que hacemos si no se pudo iniciar app? hay que volver aca :)
- } catch (ex) { alert("ERROR "+ex.message+" "+str(ex)) } });
-
- logout.off('click').on('click',function () { navigator.app.exitApp(); })
- link.off('click').on('click',function () { borrarTodo_dir(CFGLIB.pathToLib,true,function () { alert("Los archivos locales han sido eliminados"); }); });
-*/
-
-
-
+/*
 
  //D: pantalla inicial ofreciendo Run, Run con debug (alerts) y bajarse la app
  var con= $('#con');
@@ -435,7 +412,7 @@ alert("Cfg " + ser_json(Cfg));
  form.append(iversion).append("<br><br><br>");
  form.append(bgo).append("<br><br>");
  form.append(bgx).append("<br><br><br>");
- form.append(bgc);
+ form.append(bgc); */
 
  bgo.off('click').on('click',function () { try {
   alert("Iniciando");
