@@ -427,7 +427,7 @@ uiLogIn = function (){
   var group5 =$("<div>",{class:"form-group"}).appendTo(form);
   var link =$("<a>",{class:"btn-link",text:"borrar datos locales"}).appendTo(group5);
 
- login.off('click').on('click',function () { try {
+ login.on('click',function () { try {
   alert("Iniciando");
   CFGLIB.appUrl= CFG_APPURL_DFLT;
   CFGLIB.loglvlmax= 0;
@@ -444,8 +444,8 @@ uiLogIn = function (){
   runApp(); //XXX: que hacemos si no se pudo iniciar app? hay que volver aca :)
  } catch (ex) { alert("ERROR "+ex.message+" "+str(ex)) } });
 
- logout.off('click').on('click',function () { navigator.app.exitApp(); })
- link.off('click').on('click',function () { borrarTodo_dir(CFGLIB.pathToLib,true,function () { alert("Los archivos locales han sido eliminados"); }); });
+ logout.on('click',function () { navigator.app.exitApp(); })
+ link.on('click',function () { borrarTodo_dir(CFGLIB.pathToLib,true,function () { alert("Los archivos locales han sido eliminados"); }); });
 
 
 
