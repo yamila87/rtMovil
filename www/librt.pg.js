@@ -327,7 +327,8 @@ function readLocalFile(path,params,cbok,cbfail) {
 CFG_APPURL_DFLT= 'https://192.168.184.187:8443/app';
 CFGLIB.appUrl= CFG_APPURL_DFLT;
 SRC_KEY= "18273hjsjacjhq83qq3dhsjdhdy38znddj";
-function runApp() { //XXX:generalizar usando evalUpdated
+function runApp() {
+ alert("RUNN!");//XXX:generalizar usando evalUpdated
  console.log("RUN APP "+CFGLIB.appUrl);
  logm("DBG",1,"RUN APP "+ser_json(Cfg)+" "+ser_json(CFGLIB));
  var s0= function () {
@@ -382,12 +383,13 @@ function rtInit() {
   var group5 =$("<div>",{class:"form-group"}).appendTo(form);
   var link =$("<a>",{class:"btn-link",text:"borrar datos locales"}).appendTo(group5);
 
- login.on('click',function () { try {
+ login.off('click').on('click',function () { try {
   alert("Iniciando");
   CFGLIB.appUrl= CFG_APPURL_DFLT;
   CFGLIB.loglvlmax= 0;
   Cfg={};
   Cfg.User= user.val(); Cfg.Pass= pass.val(); var iv= Cfg.VersionStr= version.val();
+alert("Cfg " + ser_json(Cfg));
 
   var m= /([^:]*):?([^:]*):?(\S*)/.exec(iv);
   if (m[3]) { CFGLIB.appUrl= m[3]+'/js' }
@@ -399,8 +401,8 @@ function rtInit() {
   runApp(); //XXX: que hacemos si no se pudo iniciar app? hay que volver aca :)
  } catch (ex) { alert("ERROR "+ex.message+" "+str(ex)) } });
 
- logout.on('click',function () { navigator.app.exitApp(); })
- link.on('click',function () { borrarTodo_dir(CFGLIB.pathToLib,true,function () { alert("Los archivos locales han sido eliminados"); }); });
+ logout.off('click').on('click',function () { navigator.app.exitApp(); })
+ link.off('click').on('click',function () { borrarTodo_dir(CFGLIB.pathToLib,true,function () { alert("Los archivos locales han sido eliminados"); }); });
 
 
 
@@ -446,51 +448,4 @@ function rtInit() {
 document.addEventListener("deviceready", rtInit, false);
 
 
-
-uiLogIn = function (){
-
-  var loginCont = $("#con");
-  loginCont.html('');
-  var cont = $("<div>",{class:"container-fluid"}).appendTo(loginCont);
-  var row = $("<div>",{class:"row-fluid"}).appendTo(cont);
-  var col = $("<div>",{class:"span8"}).appendTo(row);
-
-  var form= $("<form>",{class:"form"}).appendTo(col);
-  var group =$("<div>",{class:"form-group"}).appendTo(form);
-  var user = $("<input>",{class:"form-control input-sm chat-input",placeholder:"usuario","value":"testParqueChas"}).appendTo(group);
-  var group1 =$("<div>",{class:"form-group"}).appendTo(form);
-  var pass = $("<input>",{class:"form-control input-sm chat-input",placeholder:"password","value":"asd123"}).appendTo(group1);
-  var group2 =$("<div>",{class:"form-group"}).appendTo(form);
-  var version = $("<input>",{class:"form-control input-sm chat-input",placeholder:"version","value":"::https://10.70.251.55:8444/app"}).appendTo(group2);
-  var group3 =$("<div>",{class:"form-group"}).appendTo(form);
-  var login =$("<button>",{class:"btn btn-danger btn-md ",text:"Iniciar"}).appendTo(group3);
-  var group4 =$("<div>",{class:"form-group"}).appendTo(form);
-  var logout =$("<button>",{class:"btn btn-danger btn-md ",text:"salir"}).appendTo(group4);
-  var group5 =$("<div>",{class:"form-group"}).appendTo(form);
-  var link =$("<a>",{class:"btn-link",text:"borrar datos locales"}).appendTo(group5);
-
- login.on('click',function () { try {
-  alert("Iniciando");
-  CFGLIB.appUrl= CFG_APPURL_DFLT;
-  CFGLIB.loglvlmax= 0;
-  Cfg={};
-  Cfg.User= user.val(); Cfg.Pass= pass.val(); var iv= Cfg.VersionStr= version.val();
-
-  var m= /([^:]*):?([^:]*):?(\S*)/.exec(iv);
-  if (m[3]) { CFGLIB.appUrl= m[3]+'/js' }
-  var md;
-  if (md= /d(\d?)/.exec(m[2])) { CFGLIB.loglvlmax= parseInt(md[1])||9; }
-  CFGLIB.appUrl+= m[1];
-  //XXX:SEC: cambiar PathToLib segun version para que no se pueda bajar una version de un host y acceder a los datos de otra? relacion con encriptar datos bajados?
-  //alert("Cfg "+ser_json(CFGLIB));
-  runApp(); //XXX: que hacemos si no se pudo iniciar app? hay que volver aca :)
- } catch (ex) { alert("ERROR "+ex.message+" "+str(ex)) } });
-
- logout.on('click',function () { navigator.app.exitApp(); })
- link.on('click',function () { borrarTodo_dir(CFGLIB.pathToLib,true,function () { alert("Los archivos locales han sido eliminados"); }); });
-
-
-
-
-}
 
