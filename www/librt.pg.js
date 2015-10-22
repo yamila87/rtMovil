@@ -361,7 +361,49 @@ function rtInit() {
   { return true; }
  LibAppStarted= true;
  CFGLIB.loglvlmax=0;
- uiLogIn();
+
+   var loginCont = $("#con");
+  loginCont.html('');
+  var cont = $("<div>",{class:"container-fluid"}).appendTo(loginCont);
+  var row = $("<div>",{class:"row-fluid"}).appendTo(cont);
+  var col = $("<div>",{class:"span8"}).appendTo(row);
+
+  var form= $("<form>",{class:"form"}).appendTo(col);
+  var group =$("<div>",{class:"form-group"}).appendTo(form);
+  var user = $("<input>",{class:"form-control input-sm chat-input",placeholder:"usuario","value":"testParqueChas"}).appendTo(group);
+  var group1 =$("<div>",{class:"form-group"}).appendTo(form);
+  var pass = $("<input>",{class:"form-control input-sm chat-input",placeholder:"password","value":"asd123"}).appendTo(group1);
+  var group2 =$("<div>",{class:"form-group"}).appendTo(form);
+  var version = $("<input>",{class:"form-control input-sm chat-input",placeholder:"version","value":"::https://10.70.251.55:8444/app"}).appendTo(group2);
+  var group3 =$("<div>",{class:"form-group"}).appendTo(form);
+  var login =$("<button>",{class:"btn btn-danger btn-md ",text:"Iniciar"}).appendTo(group3);
+  var group4 =$("<div>",{class:"form-group"}).appendTo(form);
+  var logout =$("<button>",{class:"btn btn-danger btn-md ",text:"salir"}).appendTo(group4);
+  var group5 =$("<div>",{class:"form-group"}).appendTo(form);
+  var link =$("<a>",{class:"btn-link",text:"borrar datos locales"}).appendTo(group5);
+
+ login.on('click',function () { try {
+  alert("Iniciando");
+  CFGLIB.appUrl= CFG_APPURL_DFLT;
+  CFGLIB.loglvlmax= 0;
+  Cfg={};
+  Cfg.User= user.val(); Cfg.Pass= pass.val(); var iv= Cfg.VersionStr= version.val();
+
+  var m= /([^:]*):?([^:]*):?(\S*)/.exec(iv);
+  if (m[3]) { CFGLIB.appUrl= m[3]+'/js' }
+  var md;
+  if (md= /d(\d?)/.exec(m[2])) { CFGLIB.loglvlmax= parseInt(md[1])||9; }
+  CFGLIB.appUrl+= m[1];
+  //XXX:SEC: cambiar PathToLib segun version para que no se pueda bajar una version de un host y acceder a los datos de otra? relacion con encriptar datos bajados?
+  //alert("Cfg "+ser_json(CFGLIB));
+  runApp(); //XXX: que hacemos si no se pudo iniciar app? hay que volver aca :)
+ } catch (ex) { alert("ERROR "+ex.message+" "+str(ex)) } });
+
+ logout.on('click',function () { navigator.app.exitApp(); })
+ link.on('click',function () { borrarTodo_dir(CFGLIB.pathToLib,true,function () { alert("Los archivos locales han sido eliminados"); }); });
+
+
+
 
  //D: pantalla inicial ofreciendo Run, Run con debug (alerts) y bajarse la app
 /* var con= $('#con');
