@@ -415,9 +415,9 @@ function rtInit() {
  con.html('');
  var form= $('<div class="form"> ');
  con.append(form);
- var iusr=$('<input class="form-control input-sm chat-input"  placeholder="usuario" value="testParqueChas">');
- var ipass=$('<input class="form-control input-sm chat-input" type="password" placeholder="clave" value="asd123">');
- var iversion=$('<input class="form-control input-sm chat-input"  placeholder="version" value="::https://10.70.251.40:8444/app">');
+ var iusr=$('<input class="form-control input-lg "  placeholder="usuario" value="testParqueChas">');
+ var ipass=$('<input class="form-control input-lg " type="password" placeholder="clave" value="asd123">');
+ var iversion=$('<input class="form-control  input-lg "  placeholder="version" value="::https://10.70.251.40:8444/app">');
  var bgo=$('<button class="btn btn-danger btn-lg ">Iniciar</buton>');
  var bgx=$('<button class="btn btn-danger btn-lg " >Salir</buton>');
  var bgc=$('<a class="btn-link" href="#">(borrar datos locales)</a>');
