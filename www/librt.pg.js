@@ -60,29 +60,29 @@ function nullf() {}
 
 //S: files
 function getFile(path,fmt,cbok,cbfail) {
-    cbfail=cbfail ||onFail;
-    function read(file) {
-         var reader = new FileReader();
-         reader.onloadend = function(evt) {
-                logm("DBG",8,"getFile onloadend",{path: path, result: evt.target.result});
-                cbok(evt.target.result);
-         };
-         if (fmt=="url") { reader.readAsDataURL(file); }
-         else if (fmt=="bin") { reader.readAsBinaryString(file); }
-         else if (fmt=="array") { reader.readAsArrayBuffer(file); }
-         else { reader.readAsText(file); }
-    };
+ cbfail=cbfail ||onFail;
+ function read(file) {
+   var reader = new FileReader();
+   reader.onloadend = function(evt) {
+    logm("DBG",8,"getFile onloadend",{path: path, result: evt.target.result});
+    cbok(evt.target.result);
+   };
+   if (fmt=="url") { reader.readAsDataURL(file); }
+   else if (fmt=="bin") { reader.readAsBinaryString(file); }
+   else if (fmt=="array") { reader.readAsArrayBuffer(file); }
+   else { reader.readAsText(file); }
+ };
 
-    var onGotFile= function (file) { read(file); }
+ var onGotFile= function (file) { read(file); }
 
-    var onGotFileEntry= function (fileEntry) { fileEntry.file(onGotFile,cbfail); }
+ var onGotFileEntry= function (fileEntry) { fileEntry.file(onGotFile,cbfail); }
 
-    var onGotFs= function (fileSystem) {
-     fileSystem.root.getFile(path, {create: false}, onGotFileEntry, cbfail);
-    }
+ var onGotFs= function (fileSystem) {
+  fileSystem.root.getFile(path, {create: false}, onGotFileEntry, cbfail);
+ }
 
-    logm("DBG",8,"getFile",{path: path});
-    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onGotFs, cbfail);
+ logm("DBG",8,"getFile",{path: path});
+ window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onGotFs, cbfail);
 }
 
 function getFileMeta(path,cbok,cbfail) {
@@ -133,8 +133,8 @@ function setFile(path,data,cbok,cbfail) {
   function gotFileWriter(writer) {
   logm("DBG",9,"setFile write",[path]); try {
    writer.onwriteend = function(evt) {
-     writer.onwriteend = cbok;
-     writer.write(data);
+  writer.onwriteend = cbok;
+  writer.write(data);
    };
    writer.truncate(0);
   } catch (ex) { logm("ERR",7,"setFile write",[path,ex.message]); }
@@ -145,7 +145,6 @@ function setFileBin(path,data,cbok,cbfail) { setFile(path,strToBin(data),cbok,cb
 
 function setFileDir(path,cbok,cbfail) {
 
- alert("set file, path: " + path);
  cbfail=cbfail ||onFail;
  var parts= path.split("/");
  var i= 0;
@@ -154,7 +153,6 @@ function setFileDir(path,cbok,cbfail) {
 
  function onRequestFileSystemSuccess(fileSystem) {
 
-   alert("creo dir ok");
   if (parts.length==0) { cbok(fileSystem.root); }
   else {	createPart(fileSystem.root) }
  }
@@ -187,7 +185,6 @@ borrarTodo_dir= function (dirPath,quiereSinPedirConfirmacion,cb) {
 
 //S: http
 function getHttp(url,reqdata,cbok,cbfail) {
- alert("EN getHTTP " +url+" "+reqdata);
  cbfail=cbfail || onFail;
  logm("DBG",8,"getHttp",{url: url, req: reqdata});
 
@@ -200,62 +197,60 @@ function getHttp(url,reqdata,cbok,cbfail) {
    jqXHR.overrideMimeType('text/plain; charset=x-user-defined');
  },
   success: function(resdata){
-   alert("ok");
-
    logm("DBG",8,"getHttp",{url: url, len: reqdata.length, req: reqdata, res: resdata});
    logIn =true;
    cbok(resdata);
   },
   error: function (){
 
-    alert("err");
-     Cfg.online = false;
-    //error al conectarse
-    if (!offLine){
-      offLine = true;
-      if(!logIn){
-          var cfgPath  = CFGLIB.pathToLib.substring(0,CFGLIB.pathToLib.indexOf("/"))+"/cfg";
-          getFile(cfgPath, "txt",function (result){
-                var src=encriptar_fromSVR_r(result,SRC_KEY);
-              //creo que no anda por que tiene src_key
-               var jsonCfg = JSON.parse(src);
-              if(Cfg.User==jsonCfg.user){
-                  if(Cfg.Pass==jsonCfg.pass){
+ alert("err");
+  Cfg.online = false;
+ //error al conectarse
+ if (!offLine){
+   offLine = true;
+   if(!logIn){
+    var cfgPath  = CFGLIB.pathToLib.substring(0,CFGLIB.pathToLib.indexOf("/"))+"/cfg";
+    getFile(cfgPath, "txt",function (result){
+    var src=encriptar_fromSVR_r(result,SRC_KEY);
+     //creo que no anda por que tiene src_key
+      var jsonCfg = JSON.parse(src);
+     if(Cfg.User==jsonCfg.user){
+      if(Cfg.Pass==jsonCfg.pass){
 
-                    logIn=true;
-                    alert (" No se pudo conectar a: " + url + " .Intentando Recuperar datos locales..." );
-                    cbfail(reqdata);
+     logIn=true;
+     alert (" No se pudo conectar a: " + url + " .Intentando Recuperar datos locales..." );
+     cbfail(reqdata);
 
-                  }else
-                   {
-                     alert("La combinación de usuario y contraseña es incorrecta.");
-                   }
-              }
-               else{
-                   alert("La combinación de usuario y contraseña es incorrecta.");
-               }
-
-                 if(!logIn){
-                  //LibAppStarted=false;
-                  rtInit();
-                 }
-
-           },function (){
-            //puede ser que no tenga el cfg
-            alert("Error al querer Iniciar sesion. Para ingresar por primera vez debe estar conectado a la red. ");
-           })
-
+      }else
+       {
+      alert("La combinación de usuario y contraseña es incorrecta.");
+       }
+     }
+      else{
+       alert("La combinación de usuario y contraseña es incorrecta.");
       }
-    }else{
-      if(logIn){
-        cbfail(reqdata);
-      }else{
-         LibAppStarted= false;
-         rtInit();  //vuelve al principio
-      }
-    }
-     //cbfail(reqdata);
-    }
+
+     if(!logIn){
+      //LibAppStarted=false;
+      rtInit();
+     }
+
+     },function (){
+   //puede ser que no tenga el cfg
+   alert("Error al querer Iniciar sesion. Para ingresar por primera vez debe estar conectado a la red. ");
+     })
+
+   }
+ }else{
+   if(logIn){
+  cbfail(reqdata);
+   }else{
+   LibAppStarted= false;
+   rtInit();  //vuelve al principio
+   }
+ }
+  //cbfail(reqdata);
+ }
  });
 }
 
@@ -265,13 +260,13 @@ CFGLIB.pathDfltInLib="a/";
 function evalFile(name,failSilently,cbok,cbfail) {
  console.log("EVAL FILE de " + name);
  getFile(CFGLIB.pathToLib+name,"txt",function (srce) {
-      try {
-          var src= encriptar_r(srce,SRC_KEY);
-          var r= evalm(src+' //# sourceURL='+name,failSilently);
-          cbok(r);
-      } catch (ex) {
-         logm("ERR",1,"evalFile "+str(ex)); }
-    },
+   try {
+    var src= encriptar_r(srce,SRC_KEY);
+    var r= evalm(src+' //# sourceURL='+name,failSilently);
+    cbok(r);
+   } catch (ex) {
+   logm("ERR",1,"evalFile "+str(ex)); }
+ },
  cbfail); // si no existe tiene que ir al fail
 }
 
@@ -284,12 +279,12 @@ function evalFileOrDflt(name,failSilently,cbok,cbfail) {
 function getHttpToDflt(fname,url,cbok,cbfail) {
  console.log("EN GETHTTPTODLF " + fname +" URL   "+url);
  getHttp(url,{},function (d) {
-    try {
-          var de= encriptar(d,SRC_KEY);
-          setFile(CFGLIB.pathToLib+CFGLIB.pathDfltInLib+fname,de,cbok,cbok);
-    } catch (ex) {
-          logm("ERR",1,"getHttpToDflt setFile "+str(ex))
-    }
+ try {
+    var de= encriptar(d,SRC_KEY);
+    setFile(CFGLIB.pathToLib+CFGLIB.pathDfltInLib+fname,de,cbok,cbok);
+ } catch (ex) {
+    logm("ERR",1,"getHttpToDflt setFile "+str(ex))
+ }
   }, cbfail);
 }
 
@@ -301,33 +296,33 @@ function evalUpdated(name,cbok,cbfail) {
 
 //S: Borrar archivos
 function removeFile(path, cbok, cbfail){
-    console.log("remove file");
-    var relativeFilePath = path;
-    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
-        fileSystem.root.getFile(relativeFilePath, {create:false}, function(fileEntry){
-            fileEntry.remove(function(file){
-                console.log("File removed!");
-            },function(){
-                console.log("error deleting the file " + error.code);
-                });
-            },function(){
-                console.log("file does not exist");
-            });
-        },function(evt){
-            console.log(evt.target.error.code);
+ console.log("remove file");
+ var relativeFilePath = path;
+ window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
+  fileSystem.root.getFile(relativeFilePath, {create:false}, function(fileEntry){
+   fileEntry.remove(function(file){
+    console.log("File removed!");
+   },function(){
+    console.log("error deleting the file " + error.code);
     });
+   },function(){
+    console.log("file does not exist");
+   });
+  },function(evt){
+   console.log(evt.target.error.code);
+ });
 }
 
 //S: Lee archivo local almacenada en particular sin la funcionalidad de caché
 function readLocalFile(path,params,cbok,cbfail) {
 
-    getFile(path, "txt",
-            function(result) {cbok(result);},
-            function(err) {
-                logm("DBG", 1, "syncSubirCadaNota - getFile Error, no trae nota - Err:", err);
-                cbfail(params);
-               }
-          );
+ getFile(path, "txt",
+   function(result) {cbok(result);},
+   function(err) {
+    logm("DBG", 1, "syncSubirCadaNota - getFile Error, no trae nota - Err:", err);
+    cbfail(params);
+      }
+    );
 }
 
 //S: init
@@ -335,30 +330,27 @@ CFG_APPURL_DFLT= 'https://192.168.184.187:8443/app';
 CFGLIB.appUrl= CFG_APPURL_DFLT;
 SRC_KEY= "18273hjsjacjhq83qq3dhsjdhdy38znddj";
 function runApp() {
- alert("RUNN! :" +CFGLIB.appUrl);//XXX:generalizar usando evalUpdated
+//XXX:generalizar usando evalUpdated
  console.log("RUN APP "+CFGLIB.appUrl);
  logm("DBG",1,"RUN APP "+ser_json(Cfg)+" "+ser_json(CFGLIB));
  var s0= function () {
-   alert("a buscar https");
-
-    getHttpToDflt('app.js',CFGLIB.appUrl,s1,s1);
+ getHttpToDflt('app.js',CFGLIB.appUrl,s1,s1);
    }
 
  var s1= function () {
    evalFile(CFGLIB.pathDfltInLib+'app.js',false,nullf,function (err) {
 
-        if(offLine){
-          //por que no hay nada guardado no se encontraron los datos.
-          alert("No se encontraron datos locales. No se puede ingresar sin conexión a la red");
-        }else{
-          alert("Error iniciando paso 2, ingresó los datos correctos? ("+str(err)+")");
-        }
-        LibAppStarted= false;
-        rtInit();  //vuelve al principio
-      }
-     );
+  if(offLine){
+    //por que no hay nada guardado no se encontraron los datos.
+    alert("No se encontraron datos locales. No se puede ingresar sin conexión a la red");
+  }else{
+    alert("Error iniciando paso 2, ingresó los datos correctos? ("+str(err)+")");
   }
- alert("antes del set");
+  LibAppStarted= false;
+  rtInit();  //vuelve al principio
+   }
+  );
+  }
  setFileDir(CFGLIB.pathToLib+CFGLIB.pathDfltInLib,s0,onFailAlert);
 }
 
@@ -421,13 +413,13 @@ function rtInit() {
   //D: pantalla inicial ofreciendo Run, Run con debug (alerts) y bajarse la app
  var con= $('#con');
  con.html('');
- var form= $('<div class="form"/>');
+ var form= $('<div class="form"> ');
  con.append(form);
- var iusr=$('<input class="form-control input-sm chat-input" placeholder="usuario" value="testParqueChas">');
- var ipass=$('<input class="form-control input-sm chat-input" type="password" placeholder="clave" value="asd123">');
- var iversion=$('<input class="form-control input-sm chat-input" placeholder="version" value="::https://10.70.251.40:8444/app">');
- var bgo=$('<button class="btn btn-danger btn-md ">Iniciar</buton>');
- var bgx=$('<button class="btn btn-danger btn-md " >Salir</buton>');
+ var iusr=$('<input class="form-control input-sm chat-input" style="font-size: 2em" placeholder="usuario" value="testParqueChas">');
+ var ipass=$('<input class="form-control input-sm chat-input" style="font-size: 2em" type="password" placeholder="clave" value="asd123">');
+ var iversion=$('<input class="form-control input-sm chat-input" style="font-size: 2em" placeholder="version" value="::https://10.70.251.40:8444/app">');
+ var bgo=$('<button class="btn btn-danger btn-lg ">Iniciar</buton>');
+ var bgx=$('<button class="btn btn-danger btn-lg " >Salir</buton>');
  var bgc=$('<a class="btn-link" href="#">(borrar datos locales)</a>');
  form.append(iusr).append("<br>");
  form.append(ipass).append("<br>");
