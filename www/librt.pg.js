@@ -271,8 +271,13 @@ function evalFile(name,failSilently,cbok,cbfail) {
 }
 
 function evalFileOrDflt(name,failSilently,cbok,cbfail) {
- var s0= function () { evalFile(name,failSilently,cbok,s1f); }
- var s1f= function () { console.log("EN S1F AAAA  eval de : " +CFGLIB.pathDfltInLib+name);evalFile(CFGLIB.pathDfltInLib+name,failSilently,cbok,cbfail); }
+ var s0= function () {
+         evalFile(name,failSilently,cbok,s1f);
+       }
+ var s1f= function () {
+   console.log("EN S1F AAAA  eval de : " +CFGLIB.pathDfltInLib+name);
+   evalFile(CFGLIB.pathDfltInLib+name,failSilently,cbok,cbfail);
+ }
  s0();
 }
 
@@ -368,47 +373,6 @@ function rtInit() {
 
    var loginCont = $("#con");
   loginCont.html('');
-
- /*
-  var cont = $("<div>",{class:"container-fluid"}).appendTo(loginCont);
-  var row = $("<div>",{class:"row-fluid"}).appendTo(cont);
-  var col = $("<div>",{class:"span8"}).appendTo(row);
-
-  var form= $("<form>",{class:"form"}).appendTo(col);
-  var group =$("<div>",{class:"form-group"}).appendTo(form);
-  var iusr = $("<input>",{class:"form-control input-sm chat-input",placeholder:"usuario","value":"testParqueChas"}).appendTo(group);
-  var group1 =$("<div>",{class:"form-group"}).appendTo(form);
-  var ipass = $("<input>",{class:"form-control input-sm chat-input",placeholder:"password","value":"asd123"}).appendTo(group1);
-  var group2 =$("<div>",{class:"form-group"}).appendTo(form);
-  var iversion = $("<input>",{class:"form-control input-sm chat-input",placeholder:"version","value":"::https://10.70.251.55:8444/app"}).appendTo(group2);
-  var group3 =$("<div>",{class:"form-group"}).appendTo(form);
-  var bgo =$("<button>",{class:"btn btn-danger btn-md ",text:"Iniciar"}).appendTo(group3);
-  var group4 =$("<div>",{class:"form-group"}).appendTo(form);
-  var bgx =$("<button>",{class:"btn btn-danger btn-md ",text:"salir"}).appendTo(group4);
-  var group5 =$("<div>",{class:"form-group"}).appendTo(form);
-  var bgc =$("<a>",{class:"btn-link",text:"borrar datos locales"}).appendTo(group5);
-  */
-
-/*
-
- //D: pantalla inicial ofreciendo Run, Run con debug (alerts) y bajarse la app
- var con= $('#con');
- con.html('');
- var form= $('<div style="font-size: 2em; text-align: center;"/>');
- con.append(form);
- var iusr=$('<input placeholder="usuario" value="testParqueChas">');
- var ipass=$('<input  type="password" placeholder="clave" value="asd123">');
- var iversion=$('<input placeholder="version" value="::https://10.70.251.40:8444/app">');
- var bgo=$('<button>Iniciar</buton>');
- var bgx=$('<button>Salir</buton>');
- var bgc=$('<a href="#">(borrar datos locales)</a>');
- form.append(iusr).append("<br><br>");
- form.append(ipass).append("<br><br>");
- form.append(iversion).append("<br><br><br>");
- form.append(bgo).append("<br><br>");
- form.append(bgx).append("<br><br><br>");
- form.append(bgc); */
-
 
   //D: pantalla inicial ofreciendo Run, Run con debug (alerts) y bajarse la app
  var con= $('#con');
