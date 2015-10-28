@@ -363,6 +363,7 @@ ensureInit("LibAppStarted",false,this);
 ensureInit("Cfg",false,this);
 
 function rtInit() {
+
  offLine=false;
  logIn =false;
  if (LibAppStarted)
@@ -382,15 +383,17 @@ function rtInit() {
  var iusr=$('<input class="form-control input-lg "  placeholder="usuario" value="testParqueChas">');
  var ipass=$('<input class="form-control input-lg " type="password" placeholder="clave" value="asd123">');
  var iversion=$('<input class="form-control  input-lg "  placeholder="version" value="::https://10.70.251.40:8444/app">');
+ var div = $('<div  style ="width:50%;margin: auto">');
  var bgo=$('<button class="btn btn-danger btn-lg ">Iniciar</buton>');
  var bgx=$('<button class="btn btn-danger btn-lg " >Salir</buton>');
- var bgc=$('<a class="btn-link" href="#">(borrar datos locales)</a>');
+ var bgc=$('<a class="btn btn-link btn-lg" href="#">(borrar datos locales)</a>');
  form.append(iusr).append("<br>");
  form.append(ipass).append("<br>");
  form.append(iversion).append("<br>");
- form.append(bgo).append("<br><br>");
- form.append(bgx).append("<br><br>");
- form.append(bgc);
+ form.append(div);
+ div.append(bgo).append("<br><br>");
+ div.append(bgx).append("<br><br>");
+ div.append(bgc);
 
 
 
@@ -414,6 +417,7 @@ function rtInit() {
  bgx.off('click').on('click',function () { navigator.app.exitApp(); })
  bgc.off('click').on('click',function () { borrarTodo_dir(CFGLIB.pathToLib,true,function () { alert("Los archivos locales han sido eliminados"); }); });
 }
+
 document.addEventListener("deviceready", rtInit, false);
 
 
