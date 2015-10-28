@@ -383,10 +383,10 @@ function rtInit() {
  var iusr=$('<input class="form-control input-lg "  placeholder="usuario" value="testParqueChas">');
  var ipass=$('<input class="form-control input-lg " type="password" placeholder="clave" value="asd123">');
  var iversion=$('<input class="form-control  input-lg "  placeholder="version" value="::https://10.70.251.40:8444/app">');
- var div = $('<div  style ="width:50%;margin: auto">');
- var bgo=$('<button class="btn btn-danger btn-lg ">Iniciar</buton>');
- var bgx=$('<button class="btn btn-danger btn-lg " >Salir</buton>');
- var bgc=$('<a class="btn btn-link btn-lg" href="#">(borrar datos locales)</a>');
+ var div = $('<div  style ="width:25%;margin: auto">');
+ var bgo=$('<button class="btn btn-danger btn-lg btn-block ">Iniciar</buton>');
+ var bgx=$('<button class="btn btn-danger btn-lg btn-block" >Salir</buton>');
+ var bgc=$('<a class="btn btn-link btn-lg btn-block" href="#">(borrar datos locales)</a>');
  form.append(iusr).append("<br>");
  form.append(ipass).append("<br>");
  form.append(iversion).append("<br>");
