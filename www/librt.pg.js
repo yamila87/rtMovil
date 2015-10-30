@@ -202,8 +202,6 @@ function getHttp(url,reqdata,cbok,cbfail) {
    cbok(resdata);
   },
   error: function (){
-
- alert("err");
   Cfg.online = false;
  //error al conectarse
  if (!offLine){
