@@ -378,9 +378,9 @@ function rtInit() {
  con.html('');
  var form= $('<div class="form"> ');
  con.append(form);
- var iusr=$('<input class="form-control input-lg "  placeholder="usuario" value="testParqueChas">');
- var ipass=$('<input class="form-control input-lg " type="password" placeholder="clave" value="asd123">');
- var iversion=$('<input class="form-control  input-lg "  placeholder="version" value="::https://access1.enerminds.com:8443/app/Map">');
+ var iusr=$('<input class="form-control input-lg "  placeholder="usuario" value="">');
+ var ipass=$('<input class="form-control input-lg " type="password" placeholder="clave" value="">');
+ var iversion=$('<input class="form-control  input-lg "  placeholder="version" value="">');
  var div = $('<div  style ="width:25%;margin: auto">');
  var bgo=$('<button class="btn btn-danger btn-lg btn-block ">Iniciar</buton>');
  var bgx=$('<button class="btn btn-danger btn-lg btn-block" >Salir</buton>');
