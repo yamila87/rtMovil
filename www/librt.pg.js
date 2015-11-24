@@ -402,11 +402,20 @@ function rtInit() {
   Cfg={};
   Cfg.User= iusr.val(); Cfg.Pass= ipass.val(); var iv= Cfg.VersionStr= iversion.val();
 
-  var m= /([^:]*):?([^:]*):?(\S*)/.exec(iv);
-  if (m[3]) { CFGLIB.appUrl= m[3]+'/js' }
-  var md;
-  if (md= /d(\d?)/.exec(m[2])) { CFGLIB.loglvlmax= parseInt(md[1])||9; }
-  CFGLIB.appUrl+= m[1];
+	if (/\S+/.exec(iv)) { //A: hay parametros en version
+	  var m= /^\s*(\{.*)/.exec(iv);
+		if (m) { try { //A: tiene forma de json
+			var vopts= ser_json_r(m[1]);
+			for (var k in vopts) { CFGLIB[k]= vopts[k]; Cfg[k]= vopts[k]; }
+			//A: pisamos los defaults con el valor que nos pasaron
+			alert("CFGLIB: "+ser_json(CFGLIB));
+			alert("Cfg: "+ser_json(Cfg));
+		} catch (ex) { alert("version formato no valido, usando defaults"); iv=""; } }
+		else { CFGLIB.appUrl= iv }
+	}
+
+	CFGLIB.appUrl+="/js"; //XXX: coordinar con webMapView, el que devuelve el js y no el html
+
   //XXX:SEC: cambiar PathToLib segun version para que no se pueda bajar una version de un host y acceder a los datos de otra? relacion con encriptar datos bajados?
   //alert("Cfg "+ser_json(CFGLIB));
   runApp(); //XXX: que hacemos si no se pudo iniciar app? hay que volver aca :)
