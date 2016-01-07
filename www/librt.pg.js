@@ -343,8 +343,7 @@ function runApp() {
  var s1= function () {
    evalFile(CFGLIB.pathDfltInLib+'app.js',false,nullf,function (err) {
 
-  if(offLine){
-    //por que no hay nada guardado no se encontraron los datos.
+  if(offLine){ //A: por que no hay nada guardado no se encontraron los datos.
     alert("No se encontraron datos locales. No se puede ingresar sin conexión a la red");
   }else{
     alert("Error iniciando paso 2, ingresó los datos correctos? ("+str(err)+")");
@@ -370,10 +369,6 @@ function rtInit() {
  CFGLIB.loglvlmax=0;
  versionStr = {User:"testParqueChas",Pass:"asd123",appUrl:"https://10.70.251.40:8444/app"};
 
-
-   var loginCont = $("#con");
-  loginCont.html('');
-
   //D: pantalla inicial ofreciendo Run, Run con debug (alerts) y bajarse la app
  var con= $('#con');
  con.html('');
@@ -381,22 +376,25 @@ function rtInit() {
  con.append(form);
  var iusr=$('<input class="form-control input-lg "  placeholder="usuario" value="">');
  var ipass=$('<input class="form-control input-lg " type="password" placeholder="clave" value="">');
- var iversion=$('<input class="form-control  input-lg "  placeholder="version" value=\'{"User":"testParqueChas", "Pass":"asd123", "appUrl":"https://10.70.251.40:8444/app"}\'>');
+ var iversion=$('<input class="form-control  input-lg "  placeholder="version">');
  var div = $('<div style ="margin: auto">');
  var bgo=$('<button class="btn btn-primary btn-lg btn-block">Iniciar</buton>');
  var bgx=$('<button class="btn btn-primary btn-lg btn-block">Salir</buton>');
- var tPal=$('<button class="btn btn-success btn-lg" type="button">Palermo</buton>');
- var tPar=$('<button class="btn btn-success btn-lg" type="button">Parque Chas</buton>'); 
  var bgc=$('<a class="btn btn-link btn-lg btn-block" href="#">(borrar datos locales)</a>');
  form.append(iusr).append("<br>");
  form.append(ipass).append("<br>");
  form.append(iversion).append("<br>");
  form.append(div);
- div.append(tPal);
- div.append(tPar).append("<br><br>");
  div.append(bgo);
  div.append(bgx).append("<br><br>");
  div.append(bgc);
+
+	//XXX:QUITAR SOLO PARA PRUEBAS DESDE ACA {
+ var tPal=$('<button class="btn btn-success btn-lg" type="button">Palermo</buton>');
+ var tPar=$('<button class="btn btn-success btn-lg" type="button">Parque Chas</buton>'); 
+ div.append("<br><br>");
+ div.append(tPal);
+ div.append(tPar)
 
  tPal.on('click',function(){
   versionStr.User = "testPalermo";
@@ -409,6 +407,8 @@ function rtInit() {
   versionStr.Pass = "asd123";
   iversion.val(ser_json(versionStr));
  });
+
+	//XXX:QUITAR SOLO PARA PRUEBAS HASTA ACA }
 
  bgo.off('click').on('click',function () { try {
   alert("Iniciando");
